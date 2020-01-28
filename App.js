@@ -88,19 +88,20 @@ class Galactic extends React.Component {
     }
     return(
       <>
-        <Text>{JSON.stringify(this.state.galactic, null, 2)}</Text>
-        <Text>-------------</Text>
         <Text>{this.state.galactic.day}</Text>
         <Image
           style={{ width: 120, height: 56 }}
-          source={{ uri: this.state.galactic.toneImage }}
-        />
+          source={{ uri: this.state.galactic.toneImage }} />
         <Image
           style={{ width: 120, height: 120 }}
-          source={{ uri: this.state.galactic.tribeImage }}
-        />
+          source={{ uri: this.state.galactic.tribeImage }} />
         <Text>Kin: {this.state.galactic.kinNumber}</Text>
         <Text>Tone: {this.state.galactic.tone.number} {this.state.galactic.tone.name}</Text>
+        <Text>* {this.state.galactic.tone.words.join('\n* ')}</Text>
+        <Text>Tribe: {this.state.galactic.tribe.number} {this.state.galactic.tribe.name}</Text>
+        <Text>* {this.state.galactic.tribe.words.join('\n* ')}</Text>
+        <Text>Affirmation:{'\n' + this.state.galactic.affirmation.join('\n')}</Text>
+        <Text>Reading:{'\n' + this.state.galactic.reading.join('\n')}</Text>
       </>
     );
   }
