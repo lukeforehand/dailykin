@@ -89,6 +89,7 @@ class Galactic extends React.Component {
     return(
       <>
         <Text>{this.state.galactic.day}</Text>
+        <Text>{this.state.galactic.name}</Text>
         <Image
           style={{ width: 120, height: 56 }}
           source={{ uri: this.state.galactic.toneImage }} />
