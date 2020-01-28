@@ -36,11 +36,28 @@ class Galactic extends React.Component {
     toneNumber = texts[2].findAll(name='font')[1].getText();
     texts[2].findAll(name='font')[1].extract();
     toneWords = texts[5].getText().split('*').map(function(x) {
-      return String.replace(' +', ' ', x.trim()).replace('\n \n', '\n');
+      return x.trim();
+    });
+    tribeNumber = texts[8].findAll(name='font')[1].getText();
+    texts[8].findAll(name='font')[1].extract();
+    tribeWords = texts[11].getText().split('*').map(function(x) {
+      return x.trim();
     });
 
-    //tribeNumber = texts[5].findAll(name='font')[1].getText();
-    //texts[2].findAll(name='font')[1].extract();    
+    galactic.find(name='legend', attrs={class:'affirmation'}).extract();
+    affirmation = galactic.find(name='fieldset', attrs={class:'affirmation'}).contents.filter(function(x) {
+      return '_text' in x;
+    }).map(function(x) {
+      return x['_text'].trim();
+    });
+
+    reading = soup.find(name='table', attrs={class:'reading'})
+      .find(name='div', attrs={class:'outdent'}).contents.map(function(x) {
+        return x.getText()
+          .replace(new RegExp('^\n', 'g'), '')
+          .replace(new RegExp('\n\n', 'g'), '\n')
+          .replace(new RegExp('&quot;', 'g'), '"');
+    }).join(' ').split('\n');
 
     return {
       day: texts[0].getText().trim(),
@@ -53,10 +70,13 @@ class Galactic extends React.Component {
         name: texts[2].getText().slice('Tone: '.length),
         words: toneWords
       },
-      //tribe: {
-      //  number: tribeNumber,
-      //  name: texts[3].getText().slice('Tribe: '.length),
-      //}
+      tribe: {
+        number: tribeNumber,
+        name: texts[8].getText().slice('Tribe: '.length),
+        words: tribeWords
+      },
+      affirmation: affirmation,
+      reading: reading
     };
   }
 
