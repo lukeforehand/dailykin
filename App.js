@@ -1,37 +1,51 @@
+import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 import HomeScreen from './HomeScreen';
 import ReadingScreen from './ReadingScreen';
+
+const HomeScreenNavigator = createStackNavigator({
+  HomeScreen: {
+    screen: HomeScreen,
+    navigationOptions: {
+      title: 'Daily Kin',
+    },
+  },
+});
+
+const ReadingScreenNavigator = createStackNavigator({
+  ReadingScreen: {
+    screen: ReadingScreen,
+    navigationOptions: {
+      title: 'Reading',
+    },
+  },
+})
 
 const TabNavigator = createBottomTabNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      screen: HomeScreenNavigator,
       navigationOptions: {
-        title: 'Daily Kin',
-        headerTitle: 'Daily Kin',
         tabBarLabel: 'Daily Kin',
+        /*
+        tabBarIcon: ({tintColor})=>(
+          <Icon name='rocket' color={tintColor} size={25} />
+        )
+        */
       }
     },
     Reading: {
-      screen: ReadingScreen,
+      screen: ReadingScreenNavigator,
       navigationOptions: {
-        title: 'Reading',
-        headerTitle: 'Reading',
         tabBarLabel: 'Reading',
       }
     }
   }
 );
 
-const App = createStackNavigator({
-  TabNavigator: {
-    screen: TabNavigator,
-    navigationOptions: {
-      title: 'The Daily Kin',
-    },
-  },
-});
-
-export default createAppContainer(App);
+export default createAppContainer(TabNavigator);

@@ -58,6 +58,7 @@ export default class HomeScreen extends React.Component {
 
     return {
       day: texts[0].getText().trim(),
+      color: galactic.find(name='h1').getText().split(' ')[0].toLowerCase(),
       toneImage: this.url + toneTribeImages[0].attrs['src'],
       tribeImage: this.url + toneTribeImages[1].attrs['src'],
       kinNumber: texts[1].getText().slice('Kin: '.length).trim(),
@@ -86,27 +87,37 @@ export default class HomeScreen extends React.Component {
     }
     return(
       <SafeAreaView>
-        <ScrollView>
-          <ImageBackground
+        <ImageBackground
             resizeMode='repeat'
             style={{width: '100%', height: '100%'}}
             source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
-            <Text style={this.style.text}>{this.state.galactic.day}</Text>
-            <Text style={this.style.text}>{this.state.galactic.name}</Text>
-            <Image
-              style={{ width: 120, height: 56 }}
-              source={{ uri: this.state.galactic.toneImage }} />
-            <Image
-              style={{ width: 120, height: 120 }}
-              source={{ uri: this.state.galactic.tribeImage }} />
-            <Text style={this.style.text}>Kin: {this.state.galactic.kinNumber}</Text>
-            <Text style={this.style.text}>Tone: {this.state.galactic.tone.number} {this.state.galactic.tone.name}</Text>
-            <Text style={this.style.text}>* {this.state.galactic.tone.words.join('\n* ')}</Text>
-            <Text style={this.style.text}>Tribe: {this.state.galactic.tribe.number} {this.state.galactic.tribe.name}</Text>
-            <Text style={this.style.text}>* {this.state.galactic.tribe.words.join('\n* ')}</Text>
-            <Text style={this.style.text}>Affirmation:{'\n' + this.state.galactic.affirmation.join('\n')}</Text>
-          </ImageBackground>
-        </ScrollView>
+          <ScrollView>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+              <Image
+                style={{ width: 240, height: 112 }}
+                source={{ uri: this.state.galactic.toneImage }} />
+              <Image
+                style={{ width: 240, height: 240 }}
+                source={{ uri: this.state.galactic.tribeImage }} />
+              <Text style={this.style.text, { paddingTop:10, fontWeight: 'bold', color:'white'}}>{this.state.galactic.day}</Text>
+              <Text style={this.style.text, { paddingTop:10, fontSize: 24, fontWeight: 'bold', color: this.state.galactic.color}}>{this.state.galactic.name}</Text>
+              <Text style={this.style.text, { paddingTop:10, fontWeight: 'bold', color:'white'}}>Kin: {this.state.galactic.kinNumber}</Text>
+              <View style={{ flexDirection: 'row', flex: 1, paddingTop:10 }}>
+                <View style={{borderRightWidth: 1, borderRightColor: '#FFF', paddingRight:10}}>
+                  <Text style={this.style.text, { fontSize: 18, fontWeight: 'bold', color: this.state.galactic.color}}>Tone: {this.state.galactic.tone.number} {this.state.galactic.tone.name}</Text>
+                  <Text style={this.style.text}>* { this.state.galactic.tone.words.join('\n* ')}</Text>
+                </View>
+                <View style={{paddingLeft:10}}>
+                  <Text style={this.style.text, { fontSize: 18, fontWeight: 'bold', color: this.state.galactic.color}}>Tribe: {this.state.galactic.tribe.number} {this.state.galactic.tribe.name}</Text>
+                  <Text style={this.style.text}>* { this.state.galactic.tribe.words.join('\n* ')}</Text>
+                </View>
+              </View>
+              <Text style={this.style.text, { paddingTop:10, textAlign: 'center', fontSize: 18, fontWeight: 'bold', color: this.state.galactic.color}}>Affirmation:
+                <Text style={this.style.text, { paddingTop:10, fontWeight: 'normal', color:'white'}}>{'\n' + this.state.galactic.affirmation.join('\n')}</Text>
+              </Text>
+            </View>
+          </ScrollView>
+        </ImageBackground>
       </SafeAreaView>
     );
   }
@@ -114,7 +125,13 @@ export default class HomeScreen extends React.Component {
   style = StyleSheet.create({
     text: {
       color: 'white',
-      textAlign: 'center'
+      textAlign: 'left',
+      fontWeight: 'normal',
+      paddingTop: 10,
+      paddingBottom: 10,
+      fontSize: 16,
+      //fontFamily: 'Metamorphous'
+      fontFamily: 'Arial'
     }
   });
 
@@ -128,7 +145,7 @@ export default class HomeScreen extends React.Component {
           galactic: galactic
         }, function() {
           // callback
-          this.props.navigation.dispatch(NavigationActions.setParams({
+          this.props.navigation.dangerouslyGetParent().dispatch(NavigationActions.setParams({
             key: 'Reading',
             params: { reading: this.state.galactic.reading },
           }));
