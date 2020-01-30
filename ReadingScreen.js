@@ -7,6 +7,8 @@ import {
   ImageBackground
 } from 'react-native';
 
+import style from './style';
+
 export default class ReadingScreen extends React.Component {
 
   render() {
@@ -18,22 +20,11 @@ export default class ReadingScreen extends React.Component {
             resizeMode='repeat'
             style={{width: '100%', height: '100%'}}
             source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
-            <Text style={this.style.text}>{'\n' + this.props.navigation.dangerouslyGetParent().getParam('reading').join('\n\n')}</Text>
+            <Text style={style.text}>{'\n' + this.props.navigation.dangerouslyGetParent().getParam('reading').join('\n\n')}</Text>
           </ImageBackground>
         </ScrollView>
       </SafeAreaView>
     );
   }
-
-  style = StyleSheet.create({
-    text: {
-      color: 'white',
-      paddingTop: 10,
-      paddingBottom: 10,
-      fontSize: 16,
-      //fontFamily: 'Metamorphous'
-      fontFamily: 'Arial'
-    }
-  });
 
 }

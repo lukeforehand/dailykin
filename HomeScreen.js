@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
+import style from './style';
+
 import JSSoup from 'jssoup';
 
 export default class HomeScreen extends React.Component {
@@ -99,41 +101,27 @@ export default class HomeScreen extends React.Component {
               <Image
                 style={{ width: 240, height: 240 }}
                 source={{ uri: this.state.galactic.tribeImage }} />
-              <Text style={this.style.text, { paddingTop:10, fontWeight: 'bold', color:'white'}}>{this.state.galactic.day}</Text>
-              <Text style={this.style.text, { paddingTop:10, fontSize: 24, fontWeight: 'bold', color: this.state.galactic.color}}>{this.state.galactic.name}</Text>
-              <Text style={this.style.text, { paddingTop:10, fontWeight: 'bold', color:'white'}}>Kin: {this.state.galactic.kinNumber}</Text>
+              <Text style={style.header}>{this.state.galactic.day}</Text>
+              <Text style={[style.header, { fontSize: 24, color: this.state.galactic.color}]}>{this.state.galactic.name}</Text>
+              <Text style={style.header}>Kin: {this.state.galactic.kinNumber}</Text>
               <View style={{ flexDirection: 'row', flex: 1, paddingTop:10 }}>
-                <View style={{borderRightWidth: 1, borderRightColor: '#FFF', paddingRight:10}}>
-                  <Text style={this.style.text, { fontSize: 18, fontWeight: 'bold', color: this.state.galactic.color}}>Tone: {this.state.galactic.tone.number} {this.state.galactic.tone.name}</Text>
-                  <Text style={this.style.text}>* { this.state.galactic.tone.words.join('\n* ')}</Text>
+                <View style={{borderRightWidth: 1, borderRightColor: 'white', paddingRight:10}}>
+                  <Text style={[style.header, { fontSize: 18, fontWeight: 'bold', color: this.state.galactic.color}]}>Tone: {this.state.galactic.tone.number} {this.state.galactic.tone.name}</Text>
+                  <Text style={style.text}>* { this.state.galactic.tone.words.join('\n* ')}</Text>
                 </View>
                 <View style={{paddingLeft:10}}>
-                  <Text style={this.style.text, { fontSize: 18, fontWeight: 'bold', color: this.state.galactic.color}}>Tribe: {this.state.galactic.tribe.number} {this.state.galactic.tribe.name}</Text>
-                  <Text style={this.style.text}>* { this.state.galactic.tribe.words.join('\n* ')}</Text>
+                  <Text style={[style.header, { fontSize: 18, fontWeight: 'bold', color: this.state.galactic.color}]}>Tribe: {this.state.galactic.tribe.number} {this.state.galactic.tribe.name}</Text>
+                  <Text style={style.text}>* { this.state.galactic.tribe.words.join('\n* ')}</Text>
                 </View>
               </View>
-              <Text style={this.style.text, { paddingTop:10, textAlign: 'center', fontSize: 18, fontWeight: 'bold', color: this.state.galactic.color}}>Affirmation:
-                <Text style={this.style.text, { paddingTop:10, fontWeight: 'normal', color:'white'}}>{'\n' + this.state.galactic.affirmation.join('\n')}</Text>
-              </Text>
+              <Text style={[style.header, { textAlign: 'center', fontSize: 18, color: this.state.galactic.color}]}>Affirmation:</Text>
+              <Text style={[style.text, { textAlign: 'center' }]}>{'\n' + this.state.galactic.affirmation.join('\n')}</Text>
             </View>
           </ScrollView>
         </ImageBackground>
       </SafeAreaView>
     );
   }
-
-  style = StyleSheet.create({
-    text: {
-      color: 'white',
-      textAlign: 'left',
-      fontWeight: 'normal',
-      paddingTop: 10,
-      paddingBottom: 10,
-      fontSize: 16,
-      //fontFamily: 'Metamorphous'
-      fontFamily: 'Arial'
-    }
-  });
 
   componentDidMount() {
     return fetch(this.url)
