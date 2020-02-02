@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   SafeAreaView,
+  ActivityIndicator,
   ScrollView,
   Text,
   StyleSheet,
@@ -12,6 +13,12 @@ import style from './style';
 export default class ReadingScreen extends React.Component {
 
   render() {
+
+    if (!this.props.navigation.dangerouslyGetParent().getParam('reading')) {
+      return (
+        <ActivityIndicator />
+      )
+    }
 
     return(
       <SafeAreaView>

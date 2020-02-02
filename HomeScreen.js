@@ -96,10 +96,10 @@ export default class HomeScreen extends React.Component {
           <ScrollView>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
               <Image
-                style={{ width: 240, height: 112 }}
+                style={{ width: 160, height: 76 }}
                 source={{ uri: this.state.galactic.toneImage }} />
               <Image
-                style={{ width: 240, height: 240 }}
+                style={{ width: 160, height: 160 }}
                 source={{ uri: this.state.galactic.tribeImage }} />
               <Text style={style.header}>{this.state.galactic.day}</Text>
               <Text style={[style.header, { fontSize: 24, color: this.state.galactic.color}]}>{this.state.galactic.name}</Text>

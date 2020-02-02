@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import { StyleSheet } from 'react-native';
-//import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import HomeScreen from './HomeScreen';
 import ReadingScreen from './ReadingScreen';
@@ -33,17 +33,18 @@ const TabNavigator = createBottomTabNavigator(
       screen: HomeScreenNavigator,
       navigationOptions: {
         tabBarLabel: 'Daily Kin',
-        /*
         tabBarIcon: ({tintColor})=>(
           <Icon name='rocket' color={tintColor} size={25} />
         )
-        */
       }
     },
     Reading: {
       screen: ReadingScreenNavigator,
       navigationOptions: {
         tabBarLabel: 'Reading',
+        tabBarIcon: ({tintColor})=>(
+          <Icon name='rocket' color={tintColor} size={25} />
+        )
       }
     }
   }
