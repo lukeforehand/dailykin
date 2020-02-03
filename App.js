@@ -15,8 +15,9 @@ const HomeScreenNavigator = createStackNavigator({
     navigationOptions: {
       title: 'Daily Kin',
       headerTitleStyle: {
-        fontFamily: 'Metamorphous'
-      }
+        fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
+      },
+      headerTitleAlign: 'center'
     },
   },
 });
@@ -27,8 +28,9 @@ const ReadingScreenNavigator = createStackNavigator({
     navigationOptions: {
       title: 'Reading',
       headerTitleStyle: {
-        fontFamily: 'Metamorphous'
-      }
+        fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
+      },
+      headerTitleAlign: 'center'
     },
   },
 })

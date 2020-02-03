@@ -56,8 +56,9 @@ export default class HomeScreen extends React.Component {
           .replace(new RegExp('^\n', 'g'), '')
           .replace(new RegExp('\n\n', 'g'), '\n')
           .replace(new RegExp('&quot;', 'g'), '"');
-    }).join(' ').split('\n');
-
+    }).join(' ').split('\n').filter(function(x) {
+      return x.trim().length > 0;
+    });
     return {
       day: texts[0].getText().trim(),
       color: galactic.find(name='h1').getText().split(' ')[0].toLowerCase(),
@@ -106,15 +107,15 @@ export default class HomeScreen extends React.Component {
               <Text style={style.header}>Kin: {this.state.galactic.kinNumber}</Text>
               <View style={{ flexDirection: 'row', flex: 1, paddingTop:10 }}>
                 <View style={{borderRightWidth: 1, borderRightColor: 'white', paddingRight:10}}>
-                  <Text style={[style.header, { fontSize: 18, fontWeight: 'bold', color: this.state.galactic.color}]}>Tone: {this.state.galactic.tone.number} {this.state.galactic.tone.name}</Text>
+                  <Text style={[style.header2, { color: this.state.galactic.color}]}>Tone: {this.state.galactic.tone.number} {this.state.galactic.tone.name}</Text>
                   <Text style={style.text}>* { this.state.galactic.tone.words.join('\n* ')}</Text>
                 </View>
                 <View style={{paddingLeft:10}}>
-                  <Text style={[style.header, { fontSize: 18, fontWeight: 'bold', color: this.state.galactic.color}]}>Tribe: {this.state.galactic.tribe.number} {this.state.galactic.tribe.name}</Text>
+                  <Text style={[style.header2, { color: this.state.galactic.color}]}>Tribe: {this.state.galactic.tribe.number} {this.state.galactic.tribe.name}</Text>
                   <Text style={style.text}>* { this.state.galactic.tribe.words.join('\n* ')}</Text>
                 </View>
               </View>
-              <Text style={[style.header, { textAlign: 'center', fontSize: 18, color: this.state.galactic.color}]}>Affirmation:</Text>
+              <Text style={[style.header2, { color: this.state.galactic.color}]}>Affirmation:</Text>
               <Text style={[style.text, { textAlign: 'center' }]}>{'\n' + this.state.galactic.affirmation.join('\n')}</Text>
             </View>
           </ScrollView>

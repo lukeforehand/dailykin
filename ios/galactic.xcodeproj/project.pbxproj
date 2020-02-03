@@ -37,6 +37,7 @@
 		E7EE50293C1044EEBC59FD0E /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AAE332D6C0F44C1D9AAC5B2A /* FontAwesome5_Regular.ttf */; };
 		EFDDE0AECDCD451983381C56 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 573314E915AF417798E94425 /* EvilIcons.ttf */; };
 		F10172B8350A4502985926A1 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FCB530E382B4FC2B14F760C /* Entypo.ttf */; };
+		3398992F804B4B25A28EA31D /* metamorphous_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BEC0B3D4EF944769873768D2 /* metamorphous_regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		EBCE6A47985340EEB3FFE4AD /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = ../assets/fonts/AntDesign.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		BEC0B3D4EF944769873768D2 /* metamorphous_regular.ttf */ = {isa = PBXFileReference; name = "metamorphous_regular.ttf"; path = "../assets/fonts/metamorphous_regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				398266562A5C48B4A3B6AA5D /* Octicons.ttf */,
 				4386DFB3E8CA4063BD8F89F8 /* SimpleLineIcons.ttf */,
 				462763F244EE421BB91216A9 /* Zocial.ttf */,
+				BEC0B3D4EF944769873768D2 /* metamorphous_regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				7F400BC8489A490DBAB43990 /* Octicons.ttf in Resources */,
 				D2D3DC96BD694D42B746A54B /* SimpleLineIcons.ttf in Resources */,
 				4EA8DEFCC2BB4724BB5B1BA1 /* Zocial.ttf in Resources */,
+				3398992F804B4B25A28EA31D /* metamorphous_regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
