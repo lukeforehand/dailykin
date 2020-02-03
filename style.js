@@ -21,6 +21,7 @@ export default StyleSheet.create({
     color: 'white',
     textAlign: 'left',
     fontWeight: 'normal',
+    marginLeft: '5%',
     paddingBottom: 10,
     fontSize: 14,
     fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'

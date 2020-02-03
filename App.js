@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import { StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import HomeScreen from './HomeScreen';
 import ReadingScreen from './ReadingScreen';
@@ -42,7 +42,7 @@ const TabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: 'Daily Kin',
         tabBarIcon: ({tintColor})=>(
-          <Icon name='rocket' color={tintColor} size={25} />
+          <Icon name='home' color={tintColor} size={25} />
         )
       }
     },
@@ -51,7 +51,7 @@ const TabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: 'Reading',
         tabBarIcon: ({tintColor})=>(
-          <Icon name='rocket' color={tintColor} size={25} />
+          <Icon name='readme' color={tintColor} size={25} />
         )
       }
     }
