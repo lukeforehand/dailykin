@@ -14,6 +14,9 @@ const HomeScreenNavigator = createStackNavigator({
     screen: HomeScreen,
     navigationOptions: {
       title: 'Daily Kin',
+      headerTitleStyle: {
+        fontFamily: 'Metamorphous'
+      }
     },
   },
 });
@@ -23,6 +26,9 @@ const ReadingScreenNavigator = createStackNavigator({
     screen: ReadingScreen,
     navigationOptions: {
       title: 'Reading',
+      headerTitleStyle: {
+        fontFamily: 'Metamorphous'
+      }
     },
   },
 })

@@ -24,7 +24,7 @@ export default class ReadingScreen extends React.Component {
       <SafeAreaView>
         <ScrollView>
           <ImageBackground
-            resizeMode='repeat'
+            resizeMode='stretch'
             style={{width: '100%', height: '100%'}}
             source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
             <Text style={style.text}>{'\n' + this.props.navigation.dangerouslyGetParent().getParam('reading').join('\n\n')}</Text>

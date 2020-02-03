@@ -90,7 +90,7 @@ export default class HomeScreen extends React.Component {
     return(
       <SafeAreaView>
         <ImageBackground
-            resizeMode='repeat'
+            resizeMode='stretch'
             style={{width: '100%', height: '100%'}}
             source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
           <ScrollView>
