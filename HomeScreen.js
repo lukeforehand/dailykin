@@ -68,14 +68,12 @@ export default class HomeScreen extends React.Component {
       kinNumber: texts[1].getText().slice('Kin: '.length).trim(),
       name: galactic.find(name='h1').getText(),
       tone: {
-        //TODO: test this
         image: this.url + toneTribeImages[0].attrs['src'],
         number: toneNumber,
         name: texts[2].getText().slice('Tone: '.length),
         words: toneWords
       },
       tribe: {
-        //TODO: test this
         image: this.url + toneTribeImages[1].attrs['src'],
         number: tribeNumber,
         name: texts[8].getText().slice('Tribe: '.length),
@@ -89,18 +87,18 @@ export default class HomeScreen extends React.Component {
   parseCalendar(html) {
     soup = new JSSoup(html);
     resonant = soup.findAll(name='td', attrs={class:'cal_row_dk_hlt'})[0].getText().slice('RESONANT '.length).trim();
-    //TODO: test guided is the right day
     guided = soup.findAll(name='td', attrs={class:'cal_row_medlt_hlt'})[0].getText().slice('Guided by '.length).trim();
     moon = soup.findAll(name='td', attrs={class:'cal_row_dk_hlt'})[1];
-    moonText = moon.findAll(name='font')[0];
+    moonText = moon.findAll(name='font')[0].contents.filter(function(x) {
+      return '_text' in x;
+    });
     return {
       resonant: resonant,
       guided: guided,
       moon: {
-        //TODO: test all these
         image: this.url + moon.findAll(name='img')[0].attrs['src'],
-        name: moonText.contents[0],
-        percent: moonText.contents[1]
+        name: moonText[0]['_text'],
+        percent: moonText[1]['_text']
       }
     };
   }
@@ -130,24 +128,28 @@ export default class HomeScreen extends React.Component {
               <Text style={style.header}>{this.state.galactic.day}</Text>
               <Text style={[style.header, { fontSize: 24, color: this.state.galactic.color}]}>{this.state.galactic.name}</Text>
               <Text style={style.text}>Guided by {this.state.calendar.guided}</Text>
-              <Text style={style.header}>Kin {this.state.galactic.kinNumber}</Text>
-              //TODO: test moon image, name, and percent
-              <Image
-                style={{ width: 55, height: 55 }}
-                source={{ uri: this.state.calendar.moon.image }} />
-              <Text style={style.text}>{this.state.calendar.moon.name} {this.state.calendar.moon.percent}</Text>
+              <Text style={[style.header2, { color: this.state.galactic.color}]}>Kin {this.state.galactic.kinNumber}</Text>
+              <View style={{ flexDirection: 'row', flex: 1 }}>
+                <Image
+                  style={{ width: 110, height: 110 }}
+                  source={{ uri: this.state.calendar.moon.image }} />
+                <View style={{justifyContent:'center'}}>
+                  <Text style={style.header}>{this.state.calendar.moon.name}</Text>
+                  <Text style={style.header}>{this.state.calendar.moon.percent}</Text>
+                </View>
+              </View>
               <View style={{ flexDirection: 'row', flex: 1, paddingTop:10 }}>
                 <View style={{borderRightWidth: 1, borderRightColor: 'white', paddingRight:10}}>
-                  <Text style={[style.header2, { color: this.state.galactic.color}]}>Tone {this.state.galactic.tone.number} {this.state.galactic.tone.name}</Text>
+                  <Text style={[style.header2, { color: this.state.galactic.color}]}>Tone: {this.state.galactic.tone.number} {this.state.galactic.tone.name}</Text>
                   <Text style={style.text}>* { this.state.galactic.tone.words.join('\n* ')}</Text>
                 </View>
                 <View style={{paddingLeft:10}}>
-                  <Text style={[style.header2, { color: this.state.galactic.color}]}>Tribe {this.state.galactic.tribe.number} {this.state.galactic.tribe.name}</Text>
+                  <Text style={[style.header2, { color: this.state.galactic.color}]}>Tribe: {this.state.galactic.tribe.number} {this.state.galactic.tribe.name}</Text>
                   <Text style={style.text}>* { this.state.galactic.tribe.words.join('\n* ')}</Text>
                 </View>
               </View>
               <Text style={[style.header2, { color: this.state.galactic.color}]}>Affirmation</Text>
-              <Text style={[style.text, { textAlign: 'center' }]}>{'\n' + this.state.galactic.affirmation.join('\n')}</Text>
+              <Text style={[style.text, { textAlign: 'center' }]}>{this.state.galactic.affirmation.join('\n')}</Text>
             </View>
           </ScrollView>
         </ImageBackground>

@@ -55,6 +55,13 @@ const TabNavigator = createBottomTabNavigator(
         )
       }
     }
+  },
+  {
+    tabBarOptions: {
+      labelStyle: {
+        fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
+      }
+    }
   }
 );
 

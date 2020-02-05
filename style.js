@@ -14,6 +14,7 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontWeight: Platform.OS === 'ios' ? 'bold' : 'normal',
     paddingTop: 10,
+    paddingBottom: 5,
     fontSize: 18,
     fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
   },
