@@ -131,7 +131,11 @@ export default class HomeScreen extends React.Component {
               <Text style={[style.header, { fontSize: 24, color: this.state.galactic.color}]}>{this.state.galactic.name}</Text>
               <Text style={style.text}>Guided by {this.state.calendar.guided}</Text>
               <Text style={style.header}>Kin {this.state.galactic.kinNumber}</Text>
-              //TODO: add moon image, name, and percent
+              //TODO: test moon image, name, and percent
+              <Image
+                style={{ width: 55, height: 55 }}
+                source={{ uri: this.state.calendar.moon.image }} />
+              <Text style={style.text}>{this.state.calendar.moon.name} {this.state.calendar.moon.percent}</Text>
               <View style={{ flexDirection: 'row', flex: 1, paddingTop:10 }}>
                 <View style={{borderRightWidth: 1, borderRightColor: 'white', paddingRight:10}}>
                   <Text style={[style.header2, { color: this.state.galactic.color}]}>Tone {this.state.galactic.tone.number} {this.state.galactic.tone.name}</Text>
