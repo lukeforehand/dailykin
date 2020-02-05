@@ -29,11 +29,11 @@ export default class HomeScreen extends React.Component {
 
   parseHome(html) {
     soup = new JSSoup(html);
-    galactic = soup.find(name='div', attrs={id:'col_one_id'});
+    dailykin = soup.find(name='div', attrs={id:'col_one_id'});
     
-    texts = galactic.findAll(name='font');
+    texts = dailykin.findAll(name='font');
     
-    toneTribeImages = galactic.find(name='table').findAll(name='img');
+    toneTribeImages = dailykin.find(name='table').findAll(name='img');
     
     toneNumber = texts[2].findAll(name='font')[1].getText();
     texts[2].findAll(name='font')[1].extract();
@@ -46,8 +46,8 @@ export default class HomeScreen extends React.Component {
       return x.trim();
     });
 
-    galactic.find(name='legend', attrs={class:'affirmation'}).extract();
-    affirmation = galactic.find(name='fieldset', attrs={class:'affirmation'}).contents.filter(function(x) {
+    dailykin.find(name='legend', attrs={class:'affirmation'}).extract();
+    affirmation = dailykin.find(name='fieldset', attrs={class:'affirmation'}).contents.filter(function(x) {
       return '_text' in x;
     }).map(function(x) {
       return x['_text'].trim();
@@ -64,9 +64,9 @@ export default class HomeScreen extends React.Component {
     });
     return {
       day: texts[0].getText().trim(),
-      color: galactic.find(name='h1').getText().split(' ')[0].toLowerCase(),
+      color: dailykin.find(name='h1').getText().split(' ')[0].toLowerCase(),
       kinNumber: texts[1].getText().slice('Kin: '.length).trim(),
-      name: galactic.find(name='h1').getText(),
+      name: dailykin.find(name='h1').getText(),
       tone: {
         image: this.url + toneTribeImages[0].attrs['src'],
         number: toneNumber,
@@ -120,15 +120,15 @@ export default class HomeScreen extends React.Component {
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
               <Image
                 style={{ width: 160, height: 76 }}
-                source={{ uri: this.state.galactic.tone.image }} />
+                source={{ uri: this.state.dailykin.tone.image }} />
               <Image
                 style={{ width: 160, height: 160 }}
-                source={{ uri: this.state.galactic.tribe.image }} />
-              <Text style={[style.header2, { color: this.state.galactic.color}]}>RESONANT {this.state.calendar.resonant}</Text>
-              <Text style={style.header}>{this.state.galactic.day}</Text>
-              <Text style={[style.header, { fontSize: 24, color: this.state.galactic.color}]}>{this.state.galactic.name}</Text>
+                source={{ uri: this.state.dailykin.tribe.image }} />
+              <Text style={[style.header2, { color: this.state.dailykin.color}]}>RESONANT {this.state.calendar.resonant}</Text>
+              <Text style={style.header}>{this.state.dailykin.day}</Text>
+              <Text style={[style.header, { fontSize: 24, color: this.state.dailykin.color}]}>{this.state.dailykin.name}</Text>
               <Text style={style.text}>Guided by {this.state.calendar.guided}</Text>
-              <Text style={[style.header2, { color: this.state.galactic.color}]}>Kin {this.state.galactic.kinNumber}</Text>
+              <Text style={[style.header2, { color: this.state.dailykin.color}]}>Kin {this.state.dailykin.kinNumber}</Text>
               <View style={{ flexDirection: 'row', flex: 1 }}>
                 <Image
                   style={{ width: 110, height: 110 }}
@@ -140,16 +140,16 @@ export default class HomeScreen extends React.Component {
               </View>
               <View style={{ flexDirection: 'row', flex: 1, paddingTop:10 }}>
                 <View style={{borderRightWidth: 1, borderRightColor: 'white', paddingRight:10}}>
-                  <Text style={[style.header2, { color: this.state.galactic.color}]}>Tone: {this.state.galactic.tone.number} {this.state.galactic.tone.name}</Text>
-                  <Text style={style.text}>* { this.state.galactic.tone.words.join('\n* ')}</Text>
+                  <Text style={[style.header2, { color: this.state.dailykin.color}]}>Tone: {this.state.dailykin.tone.number} {this.state.dailykin.tone.name}</Text>
+                  <Text style={style.text}>* { this.state.dailykin.tone.words.join('\n* ')}</Text>
                 </View>
                 <View style={{paddingLeft:10}}>
-                  <Text style={[style.header2, { color: this.state.galactic.color}]}>Tribe: {this.state.galactic.tribe.number} {this.state.galactic.tribe.name}</Text>
-                  <Text style={style.text}>* { this.state.galactic.tribe.words.join('\n* ')}</Text>
+                  <Text style={[style.header2, { color: this.state.dailykin.color}]}>Tribe: {this.state.dailykin.tribe.number} {this.state.dailykin.tribe.name}</Text>
+                  <Text style={style.text}>* { this.state.dailykin.tribe.words.join('\n* ')}</Text>
                 </View>
               </View>
-              <Text style={[style.header2, { color: this.state.galactic.color}]}>Affirmation</Text>
-              <Text style={[style.text, { textAlign: 'center' }]}>{this.state.galactic.affirmation.join('\n')}</Text>
+              <Text style={[style.header2, { color: this.state.dailykin.color}]}>Affirmation</Text>
+              <Text style={[style.text, { textAlign: 'center' }]}>{this.state.dailykin.affirmation.join('\n')}</Text>
             </View>
           </ScrollView>
         </ImageBackground>
@@ -163,15 +163,15 @@ export default class HomeScreen extends React.Component {
       fetch(this.url)
         .then((response) => response.text())
         .then((html) => {
-          galactic = this.parseHome(html);
+          dailykin = this.parseHome(html);
           this.setState({
             isHomeLoading: false,
-            galactic: galactic
+            dailykin: dailykin
           }, function() {
             // callback
             this.props.navigation.dangerouslyGetParent().dispatch(NavigationActions.setParams({
               key: 'Reading',
-              params: { reading: this.state.galactic.reading },
+              params: { reading: this.state.dailykin.reading },
             }));
           })
         })
