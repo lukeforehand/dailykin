@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'galactic' do
-  # Pods for galactic
+target 'DailyKin' do
+  # Pods for DailyKin
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -36,7 +36,7 @@ target 'galactic' do
 
 
 
-  target 'galacticTests' do
+  target 'DailyKinTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -44,10 +44,10 @@ target 'galactic' do
   use_native_modules!
 end
 
-target 'galactic-tvOS' do
-  # Pods for galactic-tvOS
+target 'DailyKin-tvOS' do
+  # Pods for DailyKin-tvOS
 
-  target 'galactic-tvOSTests' do
+  target 'DailyKin-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

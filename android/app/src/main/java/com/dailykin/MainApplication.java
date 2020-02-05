@@ -1,4 +1,4 @@
-package com.galactic;
+package com.dailykin;
 
 import android.app.Application;
 import android.content.Context;
