@@ -21,10 +21,13 @@ export default class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { isLoading: true }
+    this.state = {
+      isHomeLoading: true,
+      isCalendarLoading: true
+    }
   }
 
-  parseGalactic(html) {
+  parseHome(html) {
     soup = new JSSoup(html);
     galactic = soup.find(name='div', attrs={id:'col_one_id'});
     
@@ -62,16 +65,18 @@ export default class HomeScreen extends React.Component {
     return {
       day: texts[0].getText().trim(),
       color: galactic.find(name='h1').getText().split(' ')[0].toLowerCase(),
-      toneImage: this.url + toneTribeImages[0].attrs['src'],
-      tribeImage: this.url + toneTribeImages[1].attrs['src'],
       kinNumber: texts[1].getText().slice('Kin: '.length).trim(),
       name: galactic.find(name='h1').getText(),
       tone: {
+        //TODO: test this
+        image: this.url + toneTribeImages[0].attrs['src'],
         number: toneNumber,
         name: texts[2].getText().slice('Tone: '.length),
         words: toneWords
       },
       tribe: {
+        //TODO: test this
+        image: this.url + toneTribeImages[1].attrs['src'],
         number: tribeNumber,
         name: texts[8].getText().slice('Tribe: '.length),
         words: tribeWords
@@ -81,9 +86,28 @@ export default class HomeScreen extends React.Component {
     };
   }
 
+  parseCalendar(html) {
+    soup = new JSSoup(html);
+    resonant = soup.findAll(name='td', attrs={class:'cal_row_dk_hlt'})[0].getText().slice('RESONANT '.length).trim();
+    //TODO: test guided is the right day
+    guided = soup.findAll(name='td', attrs={class:'cal_row_medlt_hlt'})[0].getText().slice('Guided by '.length).trim();
+    moon = soup.findAll(name='td', attrs={class:'cal_row_dk_hlt'})[1];
+    moonText = moon.findAll(name='font')[0];
+    return {
+      resonant: resonant,
+      guided: guided,
+      moon: {
+        //TODO: test all these
+        image: this.url + moon.findAll(name='img')[0].attrs['src'],
+        name: moonText.contents[0],
+        percent: moonText.contents[1]
+      }
+    };
+  }
+
   render() {
 
-    if (this.state.isLoading) {
+    if (this.state.isHomeLoading || this.state.isCalendarLoading) {
       return (
         <ActivityIndicator />
       )
@@ -98,24 +122,27 @@ export default class HomeScreen extends React.Component {
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
               <Image
                 style={{ width: 160, height: 76 }}
-                source={{ uri: this.state.galactic.toneImage }} />
+                source={{ uri: this.state.galactic.tone.image }} />
               <Image
                 style={{ width: 160, height: 160 }}
-                source={{ uri: this.state.galactic.tribeImage }} />
+                source={{ uri: this.state.galactic.tribe.image }} />
+              <Text style={[style.header2, { color: this.state.galactic.color}]}>RESONANT {this.state.calendar.resonant}</Text>
               <Text style={style.header}>{this.state.galactic.day}</Text>
               <Text style={[style.header, { fontSize: 24, color: this.state.galactic.color}]}>{this.state.galactic.name}</Text>
-              <Text style={style.header}>Kin: {this.state.galactic.kinNumber}</Text>
+              <Text style={style.text}>Guided by {this.state.calendar.guided}</Text>
+              <Text style={style.header}>Kin {this.state.galactic.kinNumber}</Text>
+              //TODO: add moon image, name, and percent
               <View style={{ flexDirection: 'row', flex: 1, paddingTop:10 }}>
                 <View style={{borderRightWidth: 1, borderRightColor: 'white', paddingRight:10}}>
-                  <Text style={[style.header2, { color: this.state.galactic.color}]}>Tone: {this.state.galactic.tone.number} {this.state.galactic.tone.name}</Text>
+                  <Text style={[style.header2, { color: this.state.galactic.color}]}>Tone {this.state.galactic.tone.number} {this.state.galactic.tone.name}</Text>
                   <Text style={style.text}>* { this.state.galactic.tone.words.join('\n* ')}</Text>
                 </View>
                 <View style={{paddingLeft:10}}>
-                  <Text style={[style.header2, { color: this.state.galactic.color}]}>Tribe: {this.state.galactic.tribe.number} {this.state.galactic.tribe.name}</Text>
+                  <Text style={[style.header2, { color: this.state.galactic.color}]}>Tribe {this.state.galactic.tribe.number} {this.state.galactic.tribe.name}</Text>
                   <Text style={style.text}>* { this.state.galactic.tribe.words.join('\n* ')}</Text>
                 </View>
               </View>
-              <Text style={[style.header2, { color: this.state.galactic.color}]}>Affirmation:</Text>
+              <Text style={[style.header2, { color: this.state.galactic.color}]}>Affirmation</Text>
               <Text style={[style.text, { textAlign: 'center' }]}>{'\n' + this.state.galactic.affirmation.join('\n')}</Text>
             </View>
           </ScrollView>
@@ -125,24 +152,42 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-    return fetch(this.url)
-      .then((response) => response.text())
-      .then((html) => {
-        galactic = this.parseGalactic(html);
-        this.setState({
-          isLoading: false,
-          galactic: galactic
-        }, function() {
-          // callback
-          this.props.navigation.dangerouslyGetParent().dispatch(NavigationActions.setParams({
-            key: 'Reading',
-            params: { reading: this.state.galactic.reading },
-          }));
+    return Promise.all([
+      // home
+      fetch(this.url)
+        .then((response) => response.text())
+        .then((html) => {
+          galactic = this.parseHome(html);
+          this.setState({
+            isHomeLoading: false,
+            galactic: galactic
+          }, function() {
+            // callback
+            this.props.navigation.dangerouslyGetParent().dispatch(NavigationActions.setParams({
+              key: 'Reading',
+              params: { reading: this.state.galactic.reading },
+            }));
+          })
         })
-      })
-      .catch((error) =>{
-        console.error(error);
-      });
+        .catch((error) =>{
+          console.error(error);
+        }),
+      // calendar
+      fetch(this.url + '/calendar.php')
+        .then((response) => response.text())
+        .then((html) => {
+          calendar = this.parseCalendar(html);
+          this.setState({
+            isCalendarLoading: false,
+            calendar: calendar
+          }, function() {
+            // callback
+          })
+        })
+        .catch((error) =>{
+          console.error(error);
+        })
+    ]);
   }
 
 }
