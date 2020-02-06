@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   ActivityIndicator,
   ScrollView,
+  RefreshControl,
   Text,
   Image,
   ImageBackground,
@@ -29,25 +30,28 @@ export default class HomeScreen extends React.Component {
     }
   }
 
-  componentDidMount() {
-    AppState.addEventListener('change', this._handleAppStateChange);
-  }
-
-  componentWillUnmount() {
-    AppState.removeEventListener('change', this._handleAppStateChange);
-  }
-
   _handleAppStateChange = (nextAppState) => {
     if (
       this.state.appState.match(/inactive|background/) &&
       nextAppState === 'active'
     ) {
-      console.info('App has come to the foreground!');
-      //TODO: check current date compared to loaded screen
-      // and refresh if necessary
+      currentDay = Date.parse(this.state.dailykin.day);
+      nextDay = (new Date()).getTime();
+      if (nextDay - currentDay > 86400000) {
+        this.fetchData();
+      }
     }
     this.setState({appState: nextAppState});
   };
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
+  componentDidMount() {
+    AppState.addEventListener('change', this._handleAppStateChange);
+    this.fetchData();
+  }
 
   parseHome(html) {
     soup = new JSSoup(html);
@@ -126,7 +130,6 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
-
     if (this.state.isHomeLoading || this.state.isCalendarLoading) {
       return (
         <ActivityIndicator />
@@ -179,7 +182,11 @@ export default class HomeScreen extends React.Component {
     );
   }
 
-  componentDidMount() {
+  fetchData() {
+    this.setState({
+      isHomeLoading: true,
+      isCalendarLoading: true
+    });
     return Promise.all([
       // home
       fetch(this.url)
