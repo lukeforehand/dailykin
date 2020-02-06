@@ -42,7 +42,7 @@ export default class HomeScreen extends React.Component {
       this.state.appState.match(/inactive|background/) &&
       nextAppState === 'active'
     ) {
-      console.log('App has come to the foreground!');
+      console.info('App has come to the foreground!');
       //TODO: check current date compared to loaded screen
       // and refresh if necessary
     }
