@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  AppState,
   SafeAreaView,
   ActivityIndicator,
   ScrollView,
@@ -23,9 +24,30 @@ export default class HomeScreen extends React.Component {
     super(props);
     this.state = {
       isHomeLoading: true,
-      isCalendarLoading: true
+      isCalendarLoading: true,
+      appState: AppState.currentState,
     }
   }
+
+  componentDidMount() {
+    AppState.addEventListener('change', this._handleAppStateChange);
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
+  _handleAppStateChange = (nextAppState) => {
+    if (
+      this.state.appState.match(/inactive|background/) &&
+      nextAppState === 'active'
+    ) {
+      console.log('App has come to the foreground!');
+      //TODO: check current date compared to loaded screen
+      // and refresh if necessary
+    }
+    this.setState({appState: nextAppState});
+  };
 
   parseHome(html) {
     soup = new JSSoup(html);
