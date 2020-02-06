@@ -12,9 +12,14 @@ import style from './style';
 
 export default class ReadingScreen extends React.Component {
 
+
+  refreshing() {
+    return !this.props.navigation.dangerouslyGetParent().getParam('reading');
+  }
+
   render() {
 
-    if (!this.props.navigation.dangerouslyGetParent().getParam('reading')) {
+    if (this.refreshing()) {
       return (
         <ActivityIndicator />
       )

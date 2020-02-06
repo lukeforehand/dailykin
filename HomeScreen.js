@@ -26,7 +26,7 @@ export default class HomeScreen extends React.Component {
     this.state = {
       isHomeLoading: true,
       isCalendarLoading: true,
-      appState: AppState.currentState,
+      appState: AppState.currentState
     }
   }
 
@@ -129,8 +129,12 @@ export default class HomeScreen extends React.Component {
     };
   }
 
+  refreshing() {
+    return this.state.isHomeLoading || this.state.isCalendarLoading;
+  }
+
   render() {
-    if (this.state.isHomeLoading || this.state.isCalendarLoading) {
+    if (this.refreshing()) {
       return (
         <ActivityIndicator />
       )
@@ -141,7 +145,11 @@ export default class HomeScreen extends React.Component {
             resizeMode='stretch'
             style={{width: '100%', height: '100%'}}
             source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
-          <ScrollView>
+          <ScrollView
+            refreshControl={
+              <RefreshControl refreshing={this.refreshing()} onRefresh={this.fetchData.bind(this)} />
+            }
+          >
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
               <Image
                 style={{ width: 160, height: 76 }}
