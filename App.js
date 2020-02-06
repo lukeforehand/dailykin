@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import HomeScreen from './HomeScreen';
 import ReadingScreen from './ReadingScreen';
+import AboutScreen from './AboutScreen';
 
 const HomeScreenNavigator = createStackNavigator({
   HomeScreen: {
@@ -35,6 +36,19 @@ const ReadingScreenNavigator = createStackNavigator({
   },
 })
 
+const AboutScreenNavigator = createStackNavigator({
+  AboutScreen: {
+    screen: AboutScreen,
+    navigationOptions: {
+      title: 'About',
+      headerTitleStyle: {
+        fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
+      },
+      headerTitleAlign: 'center'
+    },
+  },
+})
+
 const TabNavigator = createBottomTabNavigator(
   {
     Home: {
@@ -52,6 +66,24 @@ const TabNavigator = createBottomTabNavigator(
         tabBarLabel: 'Reading',
         tabBarIcon: ({tintColor})=>(
           <Icon name='readme' color={tintColor} size={25} />
+        )
+      }
+    },
+    About: {
+      screen: AboutScreenNavigator,
+      navigationOptions: {
+        tabBarLabel: 'About',
+        tabBarIcon: ({tintColor})=>(
+          <Icon name='question' color={tintColor} size={25} />
+        )
+      }
+    },
+    Donate: {
+      screen: ReadingScreenNavigator,
+      navigationOptions: {
+        tabBarLabel: 'Donate',
+        tabBarIcon: ({tintColor})=>(
+          <Icon name='donate' color={tintColor} size={25} />
         )
       }
     }
