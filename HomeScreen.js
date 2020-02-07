@@ -208,7 +208,9 @@ export default class HomeScreen extends React.Component {
             // callback
             this.props.navigation.dangerouslyGetParent().dispatch(NavigationActions.setParams({
               key: 'Reading',
-              params: { reading: this.state.dailykin.reading },
+              params: { 
+                dailykin: dailykin
+              }
             }));
           })
         })
@@ -225,6 +227,12 @@ export default class HomeScreen extends React.Component {
             calendar: calendar
           }, function() {
             // callback
+            this.props.navigation.dangerouslyGetParent().dispatch(NavigationActions.setParams({
+              key: 'Reading',
+              params: { 
+                calendar: calendar
+              }
+            }));
           })
         })
         .catch((error) =>{

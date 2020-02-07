@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import HomeScreen from './HomeScreen';
 import ReadingScreen from './ReadingScreen';
 import AboutScreen from './AboutScreen';
+import DonateScreen from './DonateScreen';
 
 const HomeScreenNavigator = createStackNavigator({
   HomeScreen: {
@@ -23,31 +24,54 @@ const HomeScreenNavigator = createStackNavigator({
   },
 });
 
-const ReadingScreenNavigator = createStackNavigator({
-  ReadingScreen: {
-    screen: ReadingScreen,
-    navigationOptions: {
+const ReadingScreenNavigator = createStackNavigator(
+  {
+    ReadingScreen: {
+      screen: ReadingScreen
+    },
+  },
+  {
+    defaultNavigationOptions: {
       title: 'Reading',
       headerTitleStyle: {
         fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
       },
       headerTitleAlign: 'center'
-    },
-  },
-})
+    }
+  }
+);
 
 const AboutScreenNavigator = createStackNavigator({
   AboutScreen: {
     screen: AboutScreen,
-    navigationOptions: {
+    },
+  },
+  {
+    defaultNavigationOptions: {
       title: 'About',
       headerTitleStyle: {
         fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
       },
       headerTitleAlign: 'center'
+    }
+  }
+);
+
+const DonateScreenNavigator = createStackNavigator({
+  DonateScreen: {
+    screen: DonateScreen,
     },
   },
-})
+  {
+    defaultNavigationOptions: {
+      title: 'Donate',
+      headerTitleStyle: {
+        fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
+      },
+      headerTitleAlign: 'center'
+    }
+  }
+);
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -79,7 +103,7 @@ const TabNavigator = createBottomTabNavigator(
       }
     },
     Donate: {
-      screen: ReadingScreenNavigator,
+      screen: DonateScreenNavigator,
       navigationOptions: {
         tabBarLabel: 'Donate',
         tabBarIcon: ({tintColor})=>(

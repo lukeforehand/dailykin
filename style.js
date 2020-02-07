@@ -23,8 +23,9 @@ export default StyleSheet.create({
     textAlign: 'left',
     fontWeight: 'normal',
     marginLeft: '5%',
-    paddingBottom: 10,
-    fontSize: 14,
+    marginRight: '5%',
+    lineHeight: 24,
+    fontSize: 16,
     fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
   }
 });
