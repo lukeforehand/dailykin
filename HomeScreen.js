@@ -84,7 +84,7 @@ export default class HomeScreen extends React.Component {
         return x.getText()
           .replace(new RegExp('^\n', 'g'), '')
           .replace(new RegExp('\n\n', 'g'), '\n')
-          .replace(new RegExp('&quot;', 'g'), '"');
+          .replace(new RegExp('&quot;', 'g'), '"')
           .replace(new RegExp('&amp;', 'g'), '&');
     }).join(' ').split('\n').filter(function(x) {
       return x.trim().length > 0;
@@ -198,7 +198,10 @@ export default class HomeScreen extends React.Component {
     });
     return Promise.all([
       // home
-      fetch(this.url)
+      fetch(this.url 
+        //FIXME: remove
+        //THIS ONE DOESN"T WORK+ '/kin.php?dcode_mo=02&dcode_day=09&dcode_yr=2020&decoder=decode&submit=go')
+        + '/kin.php?dcode_mo=02&dcode_day=08&dcode_yr=2020&decoder=decode&submit=go')
         .then((response) => response.text())
         .then((html) => {
           dailykin = this.parseHome(html);
