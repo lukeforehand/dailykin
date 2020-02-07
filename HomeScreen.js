@@ -198,10 +198,9 @@ export default class HomeScreen extends React.Component {
     });
     return Promise.all([
       // home
-      fetch(this.url 
+      fetch(this.url)
         //FIXME: remove
-        //THIS ONE DOESN"T WORK+ '/kin.php?dcode_mo=02&dcode_day=09&dcode_yr=2020&decoder=decode&submit=go')
-        + '/kin.php?dcode_mo=02&dcode_day=08&dcode_yr=2020&decoder=decode&submit=go')
+        //+ '/kin.php?dcode_mo=02&dcode_day=07&dcode_yr=2020&decoder=decode&submit=go')
         .then((response) => response.text())
         .then((html) => {
           dailykin = this.parseHome(html);
@@ -213,9 +212,11 @@ export default class HomeScreen extends React.Component {
             this.props.navigation.dangerouslyGetParent().dispatch(NavigationActions.setParams({
               key: 'Reading',
               params: { 
-                dailykin: dailykin
+                reading: this.state.dailykin.reading,
+                name: this.state.dailykin.name,
+                color: this.state.dailykin.color
               }
-            }));
+          }));
           })
         })
         .catch((error) =>{
@@ -231,12 +232,6 @@ export default class HomeScreen extends React.Component {
             calendar: calendar
           }, function() {
             // callback
-            this.props.navigation.dangerouslyGetParent().dispatch(NavigationActions.setParams({
-              key: 'Reading',
-              params: { 
-                calendar: calendar
-              }
-            }));
           })
         })
         .catch((error) =>{

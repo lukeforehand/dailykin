@@ -13,7 +13,8 @@ import style from './style';
 export default class ReadingScreen extends React.Component {
 
   refreshing() {
-    return !this.props.navigation.dangerouslyGetParent().getParam('dailykin');
+    return !this.props.navigation.dangerouslyGetParent().getParam('reading');
+    //FIXME: add color and name
   }
 
   render() {
@@ -31,10 +32,10 @@ export default class ReadingScreen extends React.Component {
             style={{width: '100%', height: '100%'}}
             source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
           <ScrollView>
-            <Text style={[style.header, { fontSize: 24, color: this.props.navigation.dangerouslyGetParent().getParam('dailykin').color}]}>
-              {this.props.navigation.dangerouslyGetParent().getParam('dailykin').name}
+            <Text style={[style.header, { fontSize: 24, color: this.props.navigation.dangerouslyGetParent().getParam('color')}]}>
+              {this.props.navigation.dangerouslyGetParent().getParam('name')}
             </Text>
-            <Text style={style.text}>{'\n' + this.props.navigation.dangerouslyGetParent().getParam('dailykin').reading.join('\n\n')}</Text>
+            <Text style={style.text}>{'\n' + this.props.navigation.dangerouslyGetParent().getParam('reading').join('\n\n')}</Text>
           </ScrollView>
         </ImageBackground>
       </SafeAreaView>
