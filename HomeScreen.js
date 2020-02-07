@@ -85,6 +85,7 @@ export default class HomeScreen extends React.Component {
           .replace(new RegExp('^\n', 'g'), '')
           .replace(new RegExp('\n\n', 'g'), '\n')
           .replace(new RegExp('&quot;', 'g'), '"');
+          .replace(new RegExp('&amp;', 'g'), '&');
     }).join(' ').split('\n').filter(function(x) {
       return x.trim().length > 0;
     });
