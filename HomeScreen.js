@@ -248,19 +248,19 @@ export default class HomeScreen extends React.Component {
           });
         })
         .catch((error) =>{
-          error = 'Could not load ' + (now.getMonth() + 1) + '/' + now.getDate() + '/' + now.getFullYear();
+          msg = 'Could not load ' + (now.getMonth() + 1) + '/' + now.getDate() + '/' + now.getFullYear();
           this.setState({
             isHomeLoading: false,
             dailykin: {
               day: now
             },
-            error: error
+            error: msg
           }, function() {
             // callback
             this.props.navigation.dangerouslyGetParent().dispatch(NavigationActions.setParams({
               key: 'Reading',
               params: {
-                error: error
+                error: msg
               }
             }));
           });
