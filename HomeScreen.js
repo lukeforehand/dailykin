@@ -12,6 +12,12 @@ import {
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
+import {
+  FlingGestureHandler,
+  Directions,
+  State,
+} from 'react-native-gesture-handler';
+
 import style from './style';
 
 import JSSoup from 'jssoup';
@@ -140,12 +146,33 @@ export default class HomeScreen extends React.Component {
             resizeMode='stretch'
             style={{width: '100%', height: '100%'}}
             source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
-          <ScrollView
-            refreshControl={
-              <RefreshControl refreshing={this.refreshing()} onRefresh={this.fetchData.bind(this)} />
-            }
+          <FlingGestureHandler
+            direction={Directions.RIGHT}
+            onHandlerStateChange={({ nativeEvent }) => {
+              if (nativeEvent.oldState === State.ACTIVE) {
+                this.fetchData(-1);
+              }
+            }}
           >
-            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <FlingGestureHandler
+            direction={Directions.LEFT}
+            onHandlerStateChange={({ nativeEvent }) => {
+              if (nativeEvent.oldState === State.ACTIVE) {
+                this.fetchData(1);
+              }
+            }}
+          >
+            <ScrollView
+              refreshControl={
+                <RefreshControl refreshing={this.refreshing()} onRefresh={this.fetchData.bind(this)} />
+              }
+            >
+            {this.state.error ?
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <Text style={style.header2}>{this.state.error}</Text>
+              </View>
+            :
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
               <Image
                 style={{ width: 160, height: 76 }}
                 source={{ uri: this.state.dailykin.tone.image }} />
@@ -179,28 +206,36 @@ export default class HomeScreen extends React.Component {
               <Text style={[style.header2, { color: this.state.dailykin.color}]}>Affirmation</Text>
               <Text style={[style.text, { textAlign: 'center' }]}>{this.state.dailykin.affirmation.join('\n')}</Text>
             </View>
-          </ScrollView>
+            }
+            </ScrollView>
+          </FlingGestureHandler>
+          </FlingGestureHandler>
         </ImageBackground>
       </SafeAreaView>
     );
   }
 
-  fetchData() {
+  fetchData(dayOffset=0) {
     this.setState({
       isHomeLoading: true,
       isCalendarLoading: true
     });
+    now = new Date();
+    if (this.state.dailykin) {
+      now = new Date(Date.parse(this.state.dailykin.day));
+    }
+    now.setDate(now.getDate() + dayOffset);
+    dayUrl = this.url + '/kin.php?dcode_mo=' + (now.getMonth() + 1) + '&dcode_day=' + now.getDate() + '&dcode_yr=' + now.getFullYear() + '&decoder=decode';
     return Promise.all([
       // home
-      fetch(this.url)
-        //FIXME: remove
-        //+ '/kin.php?dcode_mo=2&dcode_day=9&dcode_yr=2020&decoder=decode')
+      fetch(dayUrl)
         .then((response) => response.text())
         .then((html) => {
           dailykin = this.parseHome(html);
           this.setState({
             isHomeLoading: false,
-            dailykin: dailykin
+            dailykin: dailykin,
+            error: null
           }, function() {
             // callback
             this.props.navigation.dangerouslyGetParent().dispatch(NavigationActions.setParams({
@@ -214,7 +249,15 @@ export default class HomeScreen extends React.Component {
           });
         })
         .catch((error) =>{
-          console.error(error);
+          this.setState({
+            isHomeLoading: false,
+            dailykin: {
+              day: now
+            },
+            error: 'Could not load ' +
+              (now.getMonth() + 1) + '/' + now.getDate() + '/' + now.getFullYear()
+          });
+          console.info(error);
         }),
       // calendar
       fetch(this.url + '/calendar.php')
