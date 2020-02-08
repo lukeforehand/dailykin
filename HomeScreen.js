@@ -113,14 +113,14 @@ export default class HomeScreen extends React.Component {
 
   parseCalendar(html) {
     soup = new JSSoup(html);
-    resonant = soup.findAll(name='td', attrs={class:'cal_row_dk_hlt'})[0].getText().slice('RESONANT '.length).trim();
+    galactic = soup.findAll(name='td', attrs={class:'cal_row_dk_hlt'})[0].getText().slice('GALACTIC '.length).trim();
     guided = soup.findAll(name='td', attrs={class:'cal_row_medlt_hlt'})[0].getText().slice('Guided by '.length).trim();
     moon = soup.findAll(name='td', attrs={class:'cal_row_dk_hlt'})[1];
     moonText = moon.findAll(name='font')[0].contents.filter(function(x) {
       return '_text' in x;
     });
     return {
-      resonant: resonant,
+      galactic: galactic,
       guided: guided,
       moon: {
         image: this.url + moon.findAll(name='img')[0].attrs['src'],
@@ -179,7 +179,7 @@ export default class HomeScreen extends React.Component {
               <Image
                 style={{ width: 160, height: 160 }}
                 source={{ uri: this.state.dailykin.tribe.image }} />
-              <Text style={[style.header2, { color: this.state.dailykin.color}]}>RESONANT {this.state.calendar.resonant}</Text>
+              <Text style={[style.header2, { color: this.state.dailykin.color}]}>GALACTIC {this.state.calendar.galactic}</Text>
               <Text style={style.header}>{this.state.dailykin.day}</Text>
               <Text style={[style.header, { fontSize: 24, color: this.state.dailykin.color}]}>{this.state.dailykin.name}</Text>
               <Text style={style.text}>Guided by {this.state.calendar.guided}</Text>
@@ -225,10 +225,10 @@ export default class HomeScreen extends React.Component {
       now = new Date(Date.parse(this.state.dailykin.day));
       now.setDate(now.getDate() + dayOffset);
     }
-    dayUrl = this.url + '/kin.php?dcode_mo=' + (now.getMonth() + 1) + '&dcode_day=' + now.getDate() + '&dcode_yr=' + now.getFullYear() + '&decoder=decode';
+    dayQueryString = '?dcode_mo=' + (now.getMonth() + 1) + '&dcode_day=' + now.getDate() + '&dcode_yr=' + now.getFullYear() + '&decoder=decode';
     return Promise.all([
       // home
-      fetch(dayUrl)
+      fetch(this.url + '/kin.php' + dayQueryString)
         .then((response) => response.text())
         .then((html) => {
           dailykin = this.parseHome(html);
@@ -267,7 +267,7 @@ export default class HomeScreen extends React.Component {
           console.info(error);
         }),
       // calendar
-      fetch(this.url + '/calendar.php')
+      fetch(this.url + '/calendar.php' + dayQueryString)
         .then((response) => response.text())
         .then((html) => {
           calendar = this.parseCalendar(html);
