@@ -200,7 +200,7 @@ export default class HomeScreen extends React.Component {
       // home
       fetch(this.url)
         //FIXME: remove
-        //+ '/kin.php?dcode_mo=2&dcode_day=2&dcode_yr=2020&decoder=decode')
+        //+ '/kin.php?dcode_mo=2&dcode_day=9&dcode_yr=2020&decoder=decode')
         .then((response) => response.text())
         .then((html) => {
           dailykin = this.parseHome(html);
@@ -216,8 +216,8 @@ export default class HomeScreen extends React.Component {
                 name: this.state.dailykin.name,
                 color: this.state.dailykin.color
               }
-          }));
-          })
+            }));
+          });
         })
         .catch((error) =>{
           console.error(error);

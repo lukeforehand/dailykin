@@ -12,9 +12,22 @@ import style from './style';
 
 export default class ReadingScreen extends React.Component {
 
+  componentDidMount() {
+    this.focusListener = this.props.navigation.addListener(
+      'didFocus',
+      () => {
+        this.forceUpdate();
+      });
+  }
+  componentWillUnmount() {
+    this.focusListener.remove();
+  }
+
   refreshing() {
-    return !this.props.navigation.dangerouslyGetParent().getParam('reading');
-    //FIXME: add color and name
+    return
+      !this.props.navigation.dangerouslyGetParent().getParam('reading') ||
+      !this.props.navigation.dangerouslyGetParent().getParam('name') ||
+      !this.props.navigation.dangerouslyGetParent().getParam('color');
   }
 
   render() {
