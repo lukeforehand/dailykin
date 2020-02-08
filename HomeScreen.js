@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  AppState,
   SafeAreaView,
   ActivityIndicator,
   ScrollView,
@@ -25,32 +24,27 @@ export default class HomeScreen extends React.Component {
     super(props);
     this.state = {
       isHomeLoading: true,
-      isCalendarLoading: true,
-      appState: AppState.currentState
+      isCalendarLoading: true
     }
-  }
-
-  _handleAppStateChange = (nextAppState) => {
-    if (
-      this.state.appState.match(/inactive|background/) &&
-      nextAppState === 'active'
-    ) {
-      currentDay = Date.parse(this.state.dailykin.day);
-      nextDay = (new Date()).getTime();
-      if (nextDay - currentDay > 86400000) {
-        this.fetchData();
-      }
-    }
-    this.setState({appState: nextAppState});
-  };
-
-  componentWillUnmount() {
-    AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
   componentDidMount() {
-    AppState.addEventListener('change', this._handleAppStateChange);
     this.fetchData();
+    this.focusListener = this.props.navigation.addListener(
+      'didFocus',
+      () => {
+        if (!this.refreshing()) {
+          currentDay = Date.parse(this.state.dailykin.day);
+          nextDay = (new Date()).getTime();
+          if (nextDay - currentDay > 86400000) {
+            this.fetchData();
+          }
+        }
+      });
+  }
+
+  componentWillUnmount() {
+    this.focusListener.remove();
   }
 
   parseHome(html) {
