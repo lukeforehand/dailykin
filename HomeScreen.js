@@ -221,10 +221,10 @@ export default class HomeScreen extends React.Component {
       isCalendarLoading: true
     });
     now = new Date();
-    if (this.state.dailykin) {
+    if (dayOffset != 0) {
       now = new Date(Date.parse(this.state.dailykin.day));
+      now.setDate(now.getDate() + dayOffset);
     }
-    now.setDate(now.getDate() + dayOffset);
     dayUrl = this.url + '/kin.php?dcode_mo=' + (now.getMonth() + 1) + '&dcode_day=' + now.getDate() + '&dcode_yr=' + now.getFullYear() + '&decoder=decode';
     return Promise.all([
       // home
@@ -241,21 +241,28 @@ export default class HomeScreen extends React.Component {
             this.props.navigation.dangerouslyGetParent().dispatch(NavigationActions.setParams({
               key: 'Reading',
               params: { 
-                reading: this.state.dailykin.reading,
-                name: this.state.dailykin.name,
-                color: this.state.dailykin.color
+                dailykin: this.state.dailykin,
+                error: null
               }
             }));
           });
         })
         .catch((error) =>{
+          error = 'Could not load ' + (now.getMonth() + 1) + '/' + now.getDate() + '/' + now.getFullYear();
           this.setState({
             isHomeLoading: false,
             dailykin: {
               day: now
             },
-            error: 'Could not load ' +
-              (now.getMonth() + 1) + '/' + now.getDate() + '/' + now.getFullYear()
+            error: error
+          }, function() {
+            // callback
+            this.props.navigation.dangerouslyGetParent().dispatch(NavigationActions.setParams({
+              key: 'Reading',
+              params: {
+                error: error
+              }
+            }));
           });
           console.info(error);
         }),
