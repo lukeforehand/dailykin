@@ -200,7 +200,7 @@ export default class HomeScreen extends React.Component {
       // home
       fetch(this.url)
         //FIXME: remove
-        //+ '/kin.php?dcode_mo=02&dcode_day=07&dcode_yr=2020&decoder=decode&submit=go')
+        //+ '/kin.php?dcode_mo=2&dcode_day=2&dcode_yr=2020&decoder=decode')
         .then((response) => response.text())
         .then((html) => {
           dailykin = this.parseHome(html);

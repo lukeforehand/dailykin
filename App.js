@@ -80,7 +80,7 @@ const TabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: 'Daily Kin',
         tabBarIcon: ({tintColor})=>(
-          <Icon name='home' color={tintColor} size={25} />
+          <Icon name='home' color={tintColor} size={20} />
         )
       }
     },
@@ -89,7 +89,7 @@ const TabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: 'Reading',
         tabBarIcon: ({tintColor})=>(
-          <Icon name='readme' color={tintColor} size={25} />
+          <Icon name='readme' color={tintColor} size={20} />
         )
       }
     },
@@ -98,7 +98,7 @@ const TabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: 'About',
         tabBarIcon: ({tintColor})=>(
-          <Icon name='question' color={tintColor} size={25} />
+          <Icon name='question' color={tintColor} size={20} />
         )
       }
     },
@@ -107,7 +107,7 @@ const TabNavigator = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: 'Donate',
         tabBarIcon: ({tintColor})=>(
-          <Icon name='donate' color={tintColor} size={25} />
+          <Icon name='donate' color={tintColor} size={20} />
         )
       }
     }
@@ -115,6 +115,7 @@ const TabNavigator = createBottomTabNavigator(
   {
     tabBarOptions: {
       labelStyle: {
+        fontSize: 10,
         fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
       }
     }

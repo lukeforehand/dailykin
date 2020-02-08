@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   header: {
-    color: 'white',
+    color: '#C1CDCD',
     textAlign: 'center',
     fontWeight: Platform.OS === 'ios' ? 'bold' : 'normal',
     paddingTop: 10,
@@ -10,7 +10,7 @@ export default StyleSheet.create({
     fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
   },
   header2: {
-    color: 'white',
+    color: '#C1CDCD',
     textAlign: 'center',
     fontWeight: Platform.OS === 'ios' ? 'bold' : 'normal',
     paddingTop: 10,
@@ -19,7 +19,7 @@ export default StyleSheet.create({
     fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
   },
   text: {
-    color: 'white',
+    color: '#C1CDCD',
     textAlign: 'left',
     fontWeight: 'normal',
     marginLeft: '5%',
