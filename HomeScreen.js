@@ -22,6 +22,22 @@ import style from './style';
 
 import JSSoup from 'jssoup';
 
+function fetchResponse(url) {
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.onload = () => {
+      if (request.status === 200) {
+        resolve(request.response);
+      } else {
+        reject(new Error(request.statusText));
+      }
+    };
+    request.onerror = () => reject(new Error(request.statusText));
+    request.open('GET', url);
+    request.send();
+  });
+}
+
 export default class HomeScreen extends React.Component {
 
   url = 'https://spacestationplaza.com';
@@ -228,8 +244,7 @@ export default class HomeScreen extends React.Component {
     dayQueryString = '?dcode_mo=' + (now.getMonth() + 1) + '&dcode_day=' + now.getDate() + '&dcode_yr=' + now.getFullYear() + '&decoder=decode';
     return Promise.all([
       // home
-      fetch(this.url + '/kin.php' + dayQueryString)
-        .then((response) => response.text())
+      fetchResponse(this.url + '/kin.php' + dayQueryString)
         .then((html) => {
           dailykin = this.parseHome(html);
           this.setState({
@@ -267,8 +282,7 @@ export default class HomeScreen extends React.Component {
           console.info(error);
         }),
       // calendar
-      fetch(this.url + '/calendar.php' + dayQueryString)
-        .then((response) => response.text())
+      fetchResponse(this.url + '/calendar.php' + dayQueryString)
         .then((html) => {
           calendar = this.parseCalendar(html);
           this.setState({
