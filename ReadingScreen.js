@@ -32,7 +32,16 @@ export default class ReadingScreen extends React.Component {
 
     if (this.refreshing()) {
       return (
-        <ActivityIndicator />
+        <SafeAreaView>
+          <ImageBackground
+            resizeMode='stretch'
+            style={{width: '100%', height: '100%'}}
+            source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
+            <View style={{ flex: 1, justifyContent: 'center' }}>
+              <ActivityIndicator size='large' />
+            </View>
+          </ImageBackground>
+        </SafeAreaView>
       )
     }
 

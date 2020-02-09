@@ -8,6 +8,8 @@ import {
   Image,
   ImageBackground,
   View,
+  Animated,
+  Dimensions,
   StyleSheet
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
@@ -38,6 +40,8 @@ function fetchResponse(url) {
   });
 }
 
+const windowWidth = Dimensions.get('window').width;
+
 export default class HomeScreen extends React.Component {
 
   url = 'https://spacestationplaza.com';
@@ -48,6 +52,25 @@ export default class HomeScreen extends React.Component {
       isHomeLoading: true,
       isCalendarLoading: true
     }
+    this._touchX = new Animated.Value(windowWidth / 2);
+    this._touchX.addListener(function(x) {
+      if (x.value > windowWidth) {
+        this.fetchData(-1);
+        this._touchX.setValue(windowWidth / 2);
+      } else if (x.value < 0) {
+        this.fetchData(1);
+        this._touchX.setValue(windowWidth / 2);
+      }
+    }.bind(this));
+    this._translateX = Animated.add(this._touchX, new Animated.Value(-this._touchX._value));
+    this._translateY = new Animated.Value(0);
+  }
+
+  onSwipe(offset) {
+    Animated.spring(this._touchX, {
+      toValue: this._touchX._value + ((windowWidth / 2) * offset),
+      useNativeDriver: true
+    }).start();
   }
 
   componentDidMount() {
@@ -153,7 +176,16 @@ export default class HomeScreen extends React.Component {
   render() {
     if (this.refreshing()) {
       return (
-        <ActivityIndicator />
+        <SafeAreaView>
+          <ImageBackground
+            resizeMode='stretch'
+            style={{width: '100%', height: '100%'}}
+            source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
+            <View style={{ flex: 1, justifyContent: 'center' }}>
+              <ActivityIndicator size='large' />
+            </View>
+          </ImageBackground>
+        </SafeAreaView>
       )
     }
     return(
@@ -164,65 +196,61 @@ export default class HomeScreen extends React.Component {
             source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
           <FlingGestureHandler
             direction={Directions.RIGHT}
-            onHandlerStateChange={({ nativeEvent }) => {
-              if (nativeEvent.oldState === State.ACTIVE) {
-                this.fetchData(-1);
-              }
-            }}
-          >
+            onHandlerStateChange={ev => this.onSwipe(1)}>
           <FlingGestureHandler
             direction={Directions.LEFT}
-            onHandlerStateChange={({ nativeEvent }) => {
-              if (nativeEvent.oldState === State.ACTIVE) {
-                this.fetchData(1);
-              }
-            }}
-          >
+            onHandlerStateChange={ev => this.onSwipe(-1)}>
             <ScrollView
               refreshControl={
                 <RefreshControl refreshing={this.refreshing()} onRefresh={this.fetchData.bind(this)} />
               }
             >
+            <Animated.View
+              style={{ transform: [
+                { translateX: this._translateX },
+                { translateY: this._translateY }]
+            }}>
             {this.state.error ?
               <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={style.header2}>{this.state.error}</Text>
               </View>
             :
               <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <Image
-                style={{ width: 160, height: 76 }}
-                source={{ uri: this.state.dailykin.tone.image }} />
-              <Image
-                style={{ width: 160, height: 160 }}
-                source={{ uri: this.state.dailykin.tribe.image }} />
-              <Text style={[style.header2, { color: this.state.dailykin.color}]}>GALACTIC {this.state.calendar.galactic}</Text>
-              <Text style={style.header}>{this.state.dailykin.day}</Text>
-              <Text style={[style.header, { fontSize: 24, color: this.state.dailykin.color}]}>{this.state.dailykin.name}</Text>
-              <Text style={style.text}>Guided by {this.state.calendar.guided}</Text>
-              <Text style={[style.header2, { color: this.state.dailykin.color}]}>Kin {this.state.dailykin.kinNumber}</Text>
-              <View style={{ flexDirection: 'row', flex: 1 }}>
                 <Image
-                  style={{ width: 110, height: 110 }}
-                  source={{ uri: this.state.calendar.moon.image }} />
-                <View style={{justifyContent:'center'}}>
-                  <Text style={style.header}>{this.state.calendar.moon.name}</Text>
-                  <Text style={style.header}>{this.state.calendar.moon.percent}</Text>
+                  style={{ width: 160, height: 76 }}
+                  source={{ uri: this.state.dailykin.tone.image }} />
+                <Image
+                  style={{ width: 160, height: 160 }}
+                  source={{ uri: this.state.dailykin.tribe.image }} />
+                <Text style={[style.header2, { color: this.state.dailykin.color}]}>GALACTIC {this.state.calendar.galactic}</Text>
+                <Text style={style.header}>{this.state.dailykin.day}</Text>
+                <Text style={[style.header, { fontSize: 24, color: this.state.dailykin.color}]}>{this.state.dailykin.name}</Text>
+                <Text style={style.text}>Guided by {this.state.calendar.guided}</Text>
+                <Text style={[style.header2, { color: this.state.dailykin.color}]}>Kin {this.state.dailykin.kinNumber}</Text>
+                <View style={{ flexDirection: 'row', flex: 1 }}>
+                  <Image
+                    style={{ width: 110, height: 110 }}
+                    source={{ uri: this.state.calendar.moon.image }} />
+                  <View style={{justifyContent:'center'}}>
+                    <Text style={style.header}>{this.state.calendar.moon.name}</Text>
+                    <Text style={style.header}>{this.state.calendar.moon.percent}</Text>
+                  </View>
                 </View>
+                <View style={{ flexDirection: 'row', flex: 1, paddingTop:10 }}>
+                  <View style={{borderRightWidth: 1, borderRightColor: 'white', paddingRight:10}}>
+                    <Text style={[style.header2, { color: this.state.dailykin.color}]}>Tone: {this.state.dailykin.tone.number} {this.state.dailykin.tone.name}</Text>
+                    <Text style={style.text}>* { this.state.dailykin.tone.words.join('\n* ')}</Text>
+                  </View>
+                  <View style={{paddingLeft:10}}>
+                    <Text style={[style.header2, { color: this.state.dailykin.color}]}>Tribe: {this.state.dailykin.tribe.number} {this.state.dailykin.tribe.name}</Text>
+                    <Text style={style.text}>* { this.state.dailykin.tribe.words.join('\n* ')}</Text>
+                  </View>
+                </View>
+                <Text style={[style.header2, { color: this.state.dailykin.color}]}>Affirmation</Text>
+                <Text style={[style.text, { textAlign: 'center' }]}>{this.state.dailykin.affirmation.join('\n')}</Text>
               </View>
-              <View style={{ flexDirection: 'row', flex: 1, paddingTop:10 }}>
-                <View style={{borderRightWidth: 1, borderRightColor: 'white', paddingRight:10}}>
-                  <Text style={[style.header2, { color: this.state.dailykin.color}]}>Tone: {this.state.dailykin.tone.number} {this.state.dailykin.tone.name}</Text>
-                  <Text style={style.text}>* { this.state.dailykin.tone.words.join('\n* ')}</Text>
-                </View>
-                <View style={{paddingLeft:10}}>
-                  <Text style={[style.header2, { color: this.state.dailykin.color}]}>Tribe: {this.state.dailykin.tribe.number} {this.state.dailykin.tribe.name}</Text>
-                  <Text style={style.text}>* { this.state.dailykin.tribe.words.join('\n* ')}</Text>
-                </View>
-              </View>
-              <Text style={[style.header2, { color: this.state.dailykin.color}]}>Affirmation</Text>
-              <Text style={[style.text, { textAlign: 'center' }]}>{this.state.dailykin.affirmation.join('\n')}</Text>
-            </View>
             }
+            </Animated.View>
             </ScrollView>
           </FlingGestureHandler>
           </FlingGestureHandler>
