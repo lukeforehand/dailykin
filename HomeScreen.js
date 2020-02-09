@@ -279,7 +279,7 @@ export default class HomeScreen extends React.Component {
           })
         })
         .catch((error) =>{
-          console.error(error);
+          console.info(error);
         })
     ]);
   }
