@@ -10,3 +10,14 @@ pod install
 ```
 npx react-native run-ios
 ```
+
+# release
+
+## ios
+
+use xcode
+
+## android
+```
+./gradlew bundleRelease
+```
