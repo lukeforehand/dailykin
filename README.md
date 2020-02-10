@@ -21,3 +21,4 @@ use xcode
 ```
 ./gradlew bundleRelease
 ```
+https://facebook.github.io/react-native/docs/signed-apk-android.html
