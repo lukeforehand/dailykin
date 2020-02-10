@@ -12,6 +12,7 @@ import {
   Dimensions,
   StyleSheet
 } from 'react-native';
+
 import { NavigationActions } from 'react-navigation';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -206,16 +207,16 @@ export default class HomeScreen extends React.Component {
           <FlingGestureHandler
             direction={Directions.LEFT}
             onHandlerStateChange={ev => this.onSwipe(-1)}>
-            <ScrollView
-              refreshControl={
-                <RefreshControl tintColor='transparent' refreshing={this.refreshing()} onRefresh={this.fetchData.bind(this)} />
-              }
-            >
             <Animated.View
               style={{ transform: [
                 { translateX: this._translateX },
                 { translateY: this._translateY }]
             }}>
+            <ScrollView
+              refreshControl={
+                <RefreshControl tintColor='transparent' refreshing={this.refreshing()} onRefresh={this.fetchData.bind(this)} />
+              }
+            >
             {this.state.error ?
               <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={style.header2}>{this.state.error}</Text>
@@ -256,8 +257,8 @@ export default class HomeScreen extends React.Component {
                 <Text style={[style.text, { textAlign: 'center' }]}>{this.state.dailykin.affirmation.join('\n')}</Text>
               </View>
             }
-            </Animated.View>
             </ScrollView>
+            </Animated.View>
           </FlingGestureHandler>
           </FlingGestureHandler>
         </ImageBackground>
