@@ -14,6 +14,8 @@ import {
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+
 import {
   FlingGestureHandler,
   Directions,
@@ -50,7 +52,8 @@ export default class HomeScreen extends React.Component {
     super(props);
     this.state = {
       isHomeLoading: true,
-      isCalendarLoading: true
+      isCalendarLoading: true,
+      lastFocusDate: new Date()
     }
     this._touchX = new Animated.Value(windowWidth / 2);
     this._touchX.addListener(function(x) {
@@ -78,13 +81,14 @@ export default class HomeScreen extends React.Component {
     this.focusListener = this.props.navigation.addListener(
       'didFocus',
       () => {
-        if (!this.refreshing()) {
-          currentDay = Date.parse(this.state.dailykin.day);
-          nextDay = (new Date()).getTime();
-          if (nextDay - currentDay > 86400000) {
-            this.fetchData();
-          }
+        lastFocusDate = new Date();
+        if (this.state.lastFocusDate.getDate() < lastFocusDate.getDate()) {
+          // a new day has come since last focused, so reload
+          this.fetchData();
         }
+        this.setState({
+          lastFocusDate: lastFocusDate
+        });
       });
   }
 
@@ -194,6 +198,8 @@ export default class HomeScreen extends React.Component {
             resizeMode='stretch'
             style={{width: '100%', height: '100%'}}
             source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
+          <Icon name='arrow-left' color='grey' size={30} style={{position:'absolute', left:0, top:140, zIndex:1}} />
+          <Icon name='arrow-right' color='grey' size={30} style={{position:'absolute', left:windowWidth - 30, top:140, zIndex:1}} />
           <FlingGestureHandler
             direction={Directions.RIGHT}
             onHandlerStateChange={ev => this.onSwipe(1)}>
@@ -202,7 +208,7 @@ export default class HomeScreen extends React.Component {
             onHandlerStateChange={ev => this.onSwipe(-1)}>
             <ScrollView
               refreshControl={
-                <RefreshControl refreshing={this.refreshing()} onRefresh={this.fetchData.bind(this)} />
+                <RefreshControl tintColor='transparent' refreshing={this.refreshing()} onRefresh={this.fetchData.bind(this)} />
               }
             >
             <Animated.View
