@@ -27,5 +27,24 @@ export default StyleSheet.create({
     lineHeight: 24,
     fontSize: 16,
     fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
+  },
+  button: {
+    borderColor: '#C1CDCD',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingLeft: 60,
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center'
+  },
+  buttonText: {
+    color: '#C1CDCD',
+    textAlign: 'left',
+    fontWeight: 'normal',
+    fontSize: 22,
+    padding: 12,
+    marginLeft: '5%',
+    marginRight: '5%',
+    fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
   }
 });

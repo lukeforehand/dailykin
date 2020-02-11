@@ -5,6 +5,7 @@ import {
   ScrollView,
   View,
   Text,
+  TouchableOpacity,
   StyleSheet,
   ImageBackground
 } from 'react-native';
@@ -55,18 +56,18 @@ export default class DonateScreen extends React.Component {
     RNIap.getProducts(itemSkus)
       .then((products) => {
         this.setState({
-          //products: products,
+          //FIXME: products: products,
           products: [
-            {localizedPrice: '$1.00', productId: 1},
-            {localizedPrice: '$2.00', productId: 2},
-            {localizedPrice: '$3.00', productId: 3},
-            {localizedPrice: '$4.00', productId: 4},
-            {localizedPrice: '$5.00', productId: 5},
-            {localizedPrice: '$6.00', productId: 6},
-            {localizedPrice: '$7.00', productId: 7},
-            {localizedPrice: '$8.00', productId: 8},
-            {localizedPrice: '$9.00', productId: 9},
-            {localizedPrice: '$10.00', productId: 10},
+            {localizedPrice: '$1.00', productId: '1'},
+            {localizedPrice: '$2.00', productId: '2'},
+            {localizedPrice: '$3.00', productId: '3'},
+            {localizedPrice: '$4.00', productId: '4'},
+            {localizedPrice: '$5.00', productId: '5'},
+            {localizedPrice: '$6.00', productId: '6'},
+            {localizedPrice: '$7.00', productId: '7'},
+            {localizedPrice: '$8.00', productId: '8'},
+            {localizedPrice: '$9.00', productId: '9'},
+            {localizedPrice: '$10.00', productId: '10'},
           ],
           isLoading: false
         });
@@ -119,15 +120,23 @@ export default class DonateScreen extends React.Component {
             style={{width: '100%', height: '100%'}}
             source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
           <ScrollView>
-            <Text style={style.text}>{'\n'}
-              If you like this app please consider donating to the developer.
+            <Text style={style.buttonText}>
+              {'\n'}If you appreciate this app please consider donating to the developer.
             </Text>
             {this.state.products.map((product) => {
               return (
-                <TouchableOpacity onPress={() => this.donate(product.productId)}>
-                  <Icon name='home' color='grey' size={30} />
-                  <Text style={style.text}>{product.localizedPrice}</Text>
-                </TouchableOpacity>
+                <View key={product.productId}
+                  style={{ flexDirection: 'row', flex: 1, paddingBottom:3}}>
+                  <View style={{ paddingRight: 80 }} />
+                  <TouchableOpacity
+                    activeOpacity={0.60}
+                    style={style.button}
+                    onPress={() => this.donate(product.productId)}>
+                      <Icon color='#C1CDCD' name='donate' size={35} />
+                      <Text style={style.buttonText}>{product.localizedPrice}</Text>
+                  </TouchableOpacity>
+                  <View style={{ paddingLeft: 80 }} />
+                </View>
               );
             })}
           </ScrollView>
