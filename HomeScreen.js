@@ -66,15 +66,17 @@ export default class HomeScreen extends React.Component {
         this._touchX.setValue(windowWidth / 2);
       }
     }.bind(this));
-    this._translateX = Animated.add(this._touchX, new Animated.Value(-this._touchX._value));
+    this._translateX = Animated.add(this._touchX, new Animated.Value(-windowWidth / 2));
     this._translateY = new Animated.Value(0);
   }
 
-  onSwipe(offset) {
-    Animated.spring(this._touchX, {
-      toValue: this._touchX._value + ((windowWidth / 2) * offset),
-      useNativeDriver: true
-    }).start();
+  onSwipe(nativeEvent, offset) {
+    if (nativeEvent.state === State.ACTIVE) {
+      Animated.spring(this._touchX, {
+        toValue: this._touchX._value + ((windowWidth / 2) * offset),
+        useNativeDriver: true
+      }).start();
+    }
   }
 
   componentDidMount() {
@@ -203,10 +205,10 @@ export default class HomeScreen extends React.Component {
           <Icon name='arrow-right' color='grey' size={30} style={{position:'absolute', left:windowWidth - 30, top:140, zIndex:1}} />
           <FlingGestureHandler
             direction={Directions.RIGHT}
-            onHandlerStateChange={ev => this.onSwipe(1)}>
+            onHandlerStateChange={({nativeEvent}) => this.onSwipe(nativeEvent, 1)}>
           <FlingGestureHandler
             direction={Directions.LEFT}
-            onHandlerStateChange={ev => this.onSwipe(-1)}>
+            onHandlerStateChange={({nativeEvent}) => this.onSwipe(nativeEvent, -1)}>
             <Animated.View
               style={{ transform: [
                 { translateX: this._translateX },
