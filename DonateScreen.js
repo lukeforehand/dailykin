@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Alert,
   SafeAreaView,
   ActivityIndicator,
   ScrollView,
@@ -41,6 +42,8 @@ export default class DonateScreen extends React.Component {
 
   componentDidMount() {
 
+//FIXME:
+/*
     this.purchaseUpdateSubscription = purchaseUpdatedListener((purchase: InAppPurchase) => {
       receipt = purchase.transactionReceipt;
       RNIap.finishTransaction(purchase, false)
@@ -52,9 +55,10 @@ export default class DonateScreen extends React.Component {
     this.purchaseErrorSubscription = purchaseErrorListener((error: PurchaseError) => {
       console.error(error);
     });
-
-    RNIap.getProducts(itemSkus)
-      .then((products) => {
+*/
+//FIXME: uncomment
+//    RNIap.getProducts(itemSkus)
+//      .then((products) => {
         this.setState({
           //FIXME: products: products,
           products: [
@@ -71,29 +75,35 @@ export default class DonateScreen extends React.Component {
           ],
           isLoading: false
         });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+//FIXME:
+//      })
+//      .catch((error) => {
+//        console.error(error);
+//      });
   }
 
   componentWillUnmount() {
-    this.purchaseUpdateSubscription.remove();
-    this.purchaseErrorSubscription.remove();
+//FIXME:
+//    this.purchaseUpdateSubscription.remove();
+//    this.purchaseErrorSubscription.remove();
   }
 
   refreshing() {
     return this.state.isLoading;
   }
 
-  donate(productId) {
-    RNIap.requestPurchase(productId, false)
+  donate(product) {
+    Alert.alert('Donating ' + product.localizedPrice);
+//FIXME:
+/*
+    RNIap.requestPurchase(product.productId, false)
       .then((purchase) => {
         // purchase callback
       })
       .catch((error) => {
         console.error(error);
       });
+*/
   }
 
   render() {
@@ -131,7 +141,7 @@ export default class DonateScreen extends React.Component {
                   <TouchableOpacity
                     activeOpacity={0.60}
                     style={style.button}
-                    onPress={() => this.donate(product.productId)}>
+                    onPress={() => this.donate(product)}>
                       <Icon color='#C1CDCD' name='donate' size={35} />
                       <Text style={style.buttonText}>{product.localizedPrice}</Text>
                   </TouchableOpacity>
