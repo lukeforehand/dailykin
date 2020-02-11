@@ -41,24 +41,24 @@ export default class DonateScreen extends React.Component {
   }
 
   componentDidMount() {
-
-//FIXME:
-/*
-    this.purchaseUpdateSubscription = purchaseUpdatedListener((purchase: InAppPurchase) => {
+    this.purchaseUpdateHandler = purchaseUpdatedListener((purchase: InAppPurchase) => {
       receipt = purchase.transactionReceipt;
       RNIap.finishTransaction(purchase, false)
+        .then(() => {
+          Alert.alert('Donation complete');
+        })
         .catch((error) => {
-          console.error(error);
+          console.info(error);
         });
     });
 
-    this.purchaseErrorSubscription = purchaseErrorListener((error: PurchaseError) => {
-      console.error(error);
+    this.purchaseErrorHandler = purchaseErrorListener((error: PurchaseError) => {
+      Alert.alert('Problem with completing donation');
+      console.info(error);
     });
-*/
-//FIXME: uncomment
-//    RNIap.getProducts(itemSkus)
-//      .then((products) => {
+
+    RNIap.getProducts(itemSkus)
+      .then((products) => {
         this.setState({
           //FIXME: products: products,
           products: [
@@ -75,17 +75,15 @@ export default class DonateScreen extends React.Component {
           ],
           isLoading: false
         });
-//FIXME:
-//      })
-//      .catch((error) => {
-//        console.error(error);
-//      });
+      })
+      .catch((error) => {
+        console.info(error);
+      });
   }
 
   componentWillUnmount() {
-//FIXME:
-//    this.purchaseUpdateSubscription.remove();
-//    this.purchaseErrorSubscription.remove();
+    this.purchaseUpdateHandler.remove();
+    this.purchaseErrorHandler.remove();
   }
 
   refreshing() {
@@ -93,17 +91,23 @@ export default class DonateScreen extends React.Component {
   }
 
   donate(product) {
-    Alert.alert('Donating ' + product.localizedPrice);
-//FIXME:
-/*
-    RNIap.requestPurchase(product.productId, false)
-      .then((purchase) => {
-        // purchase callback
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-*/
+    Alert.alert(
+      'Donate ' + product.localizedPrice + '?', '',
+      [
+        {
+          text: 'Yes',
+          onPress: () => {
+            RNIap.requestPurchase(product.productId, false)
+            .then((purchase) => {
+              // purchase callback
+            })
+            .catch((error) => {
+              console.info(error);
+            });
+          }
+        },
+        { text: 'No'}
+      ], {cancelable: false});
   }
 
   render() {
