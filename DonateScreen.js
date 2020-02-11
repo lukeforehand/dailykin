@@ -130,7 +130,7 @@ export default class DonateScreen extends React.Component {
             style={{width: '100%', height: '100%'}}
             source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
           <ScrollView>
-            <Text style={style.header}>
+            <Text style={style.text}>
               {'\n'}If you appreciate this app please consider donating to the developer.{'\n'}
             </Text>
             {this.state.products.map((product) => {
