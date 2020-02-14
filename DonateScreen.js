@@ -55,6 +55,9 @@ export default class DonateScreen extends React.Component {
 
     RNIap.getProducts(itemSkus)
       .then((products) => {
+        products = products.sort(function(a, b) {
+          return new Number(a.productId) > new Number(b.productId);
+        });
         this.setState({
           products: products,
           isLoading: false
@@ -121,22 +124,26 @@ export default class DonateScreen extends React.Component {
             <Text style={style.text}>
               {'\n'}If you appreciate this app please consider donating to the developer.{'\n'}
             </Text>
-            {this.state.products.map((product) => {
-              return (
-                <View key={product.productId}
-                  style={{ flexDirection: 'row', flex: 1, paddingBottom:3}}>
-                  <View style={{ paddingRight: 80 }} />
-                  <TouchableOpacity
-                    activeOpacity={0.60}
-                    style={style.button}
-                    onPress={() => this.donate(product)}>
-                      <Icon color='#C1CDCD' name='donate' size={35} />
-                      <Text style={style.buttonText}>{product.localizedPrice}</Text>
-                  </TouchableOpacity>
-                  <View style={{ paddingLeft: 80 }} />
-                </View>
-              );
-            })}
+            {this.state.products.length <= 0 ?
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <Text style={style.header2}>Accepting donations soon</Text>
+              </View>
+            :
+              this.state.products.map((product) => {
+                return (
+                  <View style={{paddingTop: 5}}>
+                    <TouchableOpacity
+                      key={product.productId}
+                      style={style.button}
+                      activeOpacity={0.60}
+                      onPress={() => this.donate(product)}>
+                        <Icon color='#C1CDCD' name='donate' size={35} />
+                        <Text style={style.buttonText}>{product.localizedPrice}</Text>
+                    </TouchableOpacity>
+                  </View>
+                );
+              })
+          }
           </ScrollView>
         </ImageBackground>
       </SafeAreaView>

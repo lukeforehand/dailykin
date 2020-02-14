@@ -32,7 +32,7 @@ export default StyleSheet.create({
     borderColor: '#C1CDCD',
     borderWidth: 1,
     borderRadius: 10,
-    paddingLeft: 60,
+    paddingLeft: 50,
     flexDirection: 'row',
     flex: 1,
     alignItems: 'center'
