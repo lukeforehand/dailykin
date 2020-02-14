@@ -239,7 +239,7 @@ export default class HomeScreen extends React.Component {
                 <View style={{ flexDirection: 'row', flex: 1 }}>
                   <Image
                     style={{ width: 110, height: 110 }}
-                    source={{ uri: this.state.calendar.moon.image }} />
+                    source={{ uri: this.state.calendar.moon.image + '?' + Math.random() }} />
                   <View style={{justifyContent:'center'}}>
                     <Text style={style.header}>{this.state.calendar.moon.name}</Text>
                     <Text style={style.header}>{this.state.calendar.moon.percent}</Text>
