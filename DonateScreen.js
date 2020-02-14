@@ -23,12 +23,8 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import style from './style';
 
 const itemSkus = Platform.select({
-  ios: [
-    'com.dailykin.coins100'
-  ],
-  android: [
-    'com.dailykin.coins100'
-  ]
+  ios: ['1','2','3','4','5','6','7','8','9','10'],
+  android: ['1','2','3','4','5','6','7','8','9','10']
 });
 
 export default class DonateScreen extends React.Component {
@@ -60,19 +56,7 @@ export default class DonateScreen extends React.Component {
     RNIap.getProducts(itemSkus)
       .then((products) => {
         this.setState({
-          //FIXME: products: products,
-          products: [
-            {localizedPrice: '$1.00', productId: '1'},
-            {localizedPrice: '$2.00', productId: '2'},
-            {localizedPrice: '$3.00', productId: '3'},
-            {localizedPrice: '$4.00', productId: '4'},
-            {localizedPrice: '$5.00', productId: '5'},
-            {localizedPrice: '$6.00', productId: '6'},
-            {localizedPrice: '$7.00', productId: '7'},
-            {localizedPrice: '$8.00', productId: '8'},
-            {localizedPrice: '$9.00', productId: '9'},
-            {localizedPrice: '$10.00', productId: '10'},
-          ],
+          products: products,
           isLoading: false
         });
       })
