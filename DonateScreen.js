@@ -38,14 +38,18 @@ export default class DonateScreen extends React.Component {
 
   componentDidMount() {
     this.purchaseUpdateHandler = purchaseUpdatedListener((purchase: InAppPurchase) => {
-      receipt = purchase.transactionReceipt;
-      RNIap.finishTransaction(purchase, false)
-        .then(() => {
-          Alert.alert('Donation complete');
-        })
-        .catch((error) => {
-          console.info(error);
-        });
+      const receipt = purchase.transactionReceipt;
+      if (receipt) {
+        RNIap.finishTransaction(purchase, false)
+          .then(() => {
+            // refresh products
+            this.getProducts();
+            Alert.alert('Donation complete');
+          })
+          .catch((error) => {
+            console.info(error);
+          });
+      }
     });
 
     this.purchaseErrorHandler = purchaseErrorListener((error: PurchaseError) => {
@@ -53,19 +57,8 @@ export default class DonateScreen extends React.Component {
       console.info(error);
     });
 
-    RNIap.getProducts(itemSkus)
-      .then((products) => {
-        products = products.sort(function(a, b) {
-          return new Number(a.productId) > new Number(b.productId);
-        });
-        this.setState({
-          products: products,
-          isLoading: false
-        });
-      })
-      .catch((error) => {
-        console.info(error);
-      });
+    this.getProducts();
+
   }
 
   componentWillUnmount() {
@@ -75,6 +68,27 @@ export default class DonateScreen extends React.Component {
 
   refreshing() {
     return this.state.isLoading;
+  }
+
+  getProducts() {
+    RNIap.consumeAllItemsAndroid()
+      .then(RNIap.getProducts(itemSkus)
+        .then((products) => {
+          products = products.sort(function(a, b) {
+            return new Number(a.productId) > new Number(b.productId);
+          });
+          this.setState({
+            products: products,
+            isLoading: false
+          });
+        })
+        .catch((error) => {
+          console.info(error);
+        })
+      )
+      .catch((error) => {
+        console.info(error);
+      });
   }
 
   donate(product) {
@@ -131,9 +145,8 @@ export default class DonateScreen extends React.Component {
             :
               this.state.products.map((product) => {
                 return (
-                  <View style={{paddingTop: 5}}>
+                  <View key={product.productId} style={{paddingTop: 5}}>
                     <TouchableOpacity
-                      key={product.productId}
                       style={style.button}
                       activeOpacity={0.60}
                       onPress={() => this.donate(product)}>
