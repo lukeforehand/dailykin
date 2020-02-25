@@ -126,14 +126,12 @@ function parseHome(html) {
 
 function parseCalendar(html) {
   soup = new JSSoup(html);
-  galactic = soup.findAll(name='td', attrs={class:'cal_row_dk_hlt'})[0].getText().slice('GALACTIC '.length).trim();
   guided = soup.findAll(name='td', attrs={class:'cal_row_medlt_hlt'})[0].getText().slice('Guided by '.length).trim();
   moon = soup.findAll(name='td', attrs={class:'cal_row_dk_hlt'})[1];
   moonText = moon.findAll(name='font')[0].contents.filter(function(x) {
     return '_text' in x;
   });
   return {
-    galactic: galactic,
     guided: guided,
     moon: {
       image: URL + moon.findAll(name='img')[0].attrs['src'],
@@ -145,11 +143,11 @@ function parseCalendar(html) {
 
 promises = [];
 //FIXME: this doesn't always work
-//for (i = 0; i < 260; i++) {
-//  kinNumber = (((i + 228) % 262)) + 1;
+//for (i = 0; i < 1; i++) {
+//  kinNumber = (((i + 228) % 260)) + 1;
 //  if (!fs.existsSync('data/dailykin-' + kinNumber + '.json')) {
 //    console.info('fetching data/dailykin-' + kinNumber + '.json');
-//    promises.push(fetchData(-1));
+//    promises.push(fetchData(i));
 //  }
 //}
 Promise.all(promises).then((values) => {
