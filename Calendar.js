@@ -98,14 +98,14 @@ export default class Calendar {
       // leap day is Hunab ku day
       return {
         date: date,
-        error: '\n0.0.Hunab ku, which is another name for LEAP DAY, is technically missing from the calendar.'
+        error: '0.0.Hunab ku, which is another name for LEAP DAY, is technically missing from the calendar.'
       };
     }
     if (date.getMonth() == 6 && date.getDate() == 25) {
       // Day out of time
       return {
         date: date,
-        error: '\nDay out of time, the day prior to the 13-Moon New Year, is technically missing from the calendar.  It is a time for great celebration!'
+        error: 'Day out of time, the day prior to the 13-Moon New Year, is technically missing from the calendar.  It is a time for great celebration!'
       };
     }
 

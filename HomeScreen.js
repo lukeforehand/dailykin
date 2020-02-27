@@ -26,6 +26,7 @@ import {
 import style from './style';
 
 import Calendar from './Calendar';
+import MoonPhase from './MoonPhase';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -124,8 +125,8 @@ export default class HomeScreen extends React.Component {
               }
             >
             {this.state.error ?
-              <View style={{ height: 600 }}>
-                <Text style={style.text}>{this.state.error}</Text>
+              <View style={{ height: 600, paddingTop:10 }}>
+                <Text style={style.text}>{this.state.error.message}</Text>
               </View>
             :
               <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -182,11 +183,15 @@ export default class HomeScreen extends React.Component {
     }
     
     try {
-      day = new Calendar().calculateDay(now);
+
+      var day = new Calendar().calculateDay(now);
       if (day.error) {
-        throw day.error;
+        throw new Error(day.error);
       }
+
       const data = this.loadKin(day);
+      data.moon = new MoonPhase().phase(now);
+
       this.setState({
         isLoading: false,
         data: data,
@@ -484,7 +489,7 @@ export default class HomeScreen extends React.Component {
       case 258: return require('./assets/data/dailykin-258.json');
       case 259: return require('./assets/data/dailykin-259.json');
       case 260: return require('./assets/data/dailykin-260.json');
-      default: throw '\nCould not load ' + (day.date.getMonth() + 1) + '/' + day.date.getDate() + '/' + day.date.getFullYear();
+      default: throw new Error('Could not load ' + (day.date.getMonth() + 1) + '/' + day.date.getDate() + '/' + day.date.getFullYear());
     }
   }
 }

@@ -53,8 +53,8 @@ export default class ReadingScreen extends React.Component {
             source={require('./assets/images/space.jpg')}>
           <ScrollView>
           {this.props.navigation.dangerouslyGetParent().getParam('error') ?
-            <View>
-              <Text style={style.text}>{this.props.navigation.dangerouslyGetParent().getParam('error')}</Text>
+            <View style={{ height: 600, paddingTop:10 }}>
+              <Text style={style.text}>{this.props.navigation.dangerouslyGetParent().getParam('error').message}</Text>
             </View>
           :
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
