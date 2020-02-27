@@ -25,7 +25,7 @@ export default class ReadingScreen extends React.Component {
   }
 
   refreshing() {
-    return !this.props.navigation.dangerouslyGetParent().getParam('dailykin');
+    return !this.props.navigation.dangerouslyGetParent().getParam('data');
   }
 
   render() {
@@ -58,10 +58,10 @@ export default class ReadingScreen extends React.Component {
             </View>
           :
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <Text style={[style.header, { fontSize: 24, color: this.props.navigation.dangerouslyGetParent().getParam('dailykin').color}]}>
-                {this.props.navigation.dangerouslyGetParent().getParam('dailykin').name}
+              <Text style={[style.header, { fontSize: 24, color: this.props.navigation.dangerouslyGetParent().getParam('data').dailykin.color}]}>
+                {this.props.navigation.dangerouslyGetParent().getParam('data').dailykin.name}
               </Text>
-              <Text style={style.text}>{'\n' + this.props.navigation.dangerouslyGetParent().getParam('dailykin').reading.join('\n\n')}</Text>
+              <Text style={style.text}>{'\n' + this.props.navigation.dangerouslyGetParent().getParam('data').dailykin.reading.join('\n\n')}</Text>
             </View>
           }
           </ScrollView>

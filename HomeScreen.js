@@ -27,33 +27,14 @@ import style from './style';
 
 import JSSoup from 'jssoup';
 
-function fetchResponse(url) {
-  return new Promise((resolve, reject) => {
-    const request = new XMLHttpRequest();
-    request.onload = () => {
-      if (request.status === 200) {
-        resolve(request.response);
-      } else {
-        reject(new Error(request.statusText));
-      }
-    };
-    request.onerror = () => reject(new Error(request.statusText));
-    request.open('GET', url);
-    request.send();
-  });
-}
-
 const windowWidth = Dimensions.get('window').width;
 
 export default class HomeScreen extends React.Component {
 
-  url = 'https://spacestationplaza.com';
-
   constructor(props) {
     super(props);
     this.state = {
-      isHomeLoading: true,
-      isCalendarLoading: true,
+      isLoading: true,
       lastFocusDate: new Date()
     }
     this._touchX = new Animated.Value(windowWidth / 2);
@@ -99,6 +80,7 @@ export default class HomeScreen extends React.Component {
     this.focusListener.remove();
   }
 
+/*
   parseHome(html) {
     soup = new JSSoup(html);
     dailykin = soup.find(name='div', attrs={id:'col_one_id'});
@@ -173,9 +155,9 @@ export default class HomeScreen extends React.Component {
       }
     };
   }
-
+*/
   refreshing() {
-    return this.state.isHomeLoading || this.state.isCalendarLoading;
+    return this.state.isLoading;
   }
 
   render() {
@@ -225,35 +207,35 @@ export default class HomeScreen extends React.Component {
               <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Image
                   style={{ width: 160, height: 76 }}
-                  source={{ uri: this.state.dailykin.tone.image }} />
+                  source={{ uri: this.state.data.dailykin.tone.image }} />
                 <Image
                   style={{ width: 160, height: 160 }}
-                  source={{ uri: this.state.dailykin.tribe.image }} />
-                <Text style={style.header}>{this.state.dailykin.day}</Text>
-                <Text style={[style.header, { fontSize: 24, color: this.state.dailykin.color}]}>{this.state.dailykin.name}</Text>
-                <Text style={style.text}>Guided by {this.state.calendar.guided}</Text>
-                <Text style={[style.header2, { color: this.state.dailykin.color}]}>Kin {this.state.dailykin.kinNumber}</Text>
+                  source={{ uri: this.state.data.dailykin.tribe.image }} />
+                <Text style={style.header}>{this.state.data.dailykin.day}</Text>
+                <Text style={[style.header, { fontSize: 24, color: this.state.data.dailykin.color}]}>{this.state.data.dailykin.name}</Text>
+                <Text style={style.text}>Guided by {this.state.data.calendar.guided}</Text>
+                <Text style={[style.header2, { color: this.state.data.dailykin.color}]}>Kin {this.state.data.dailykin.kinNumber}</Text>
                 <View style={{ flexDirection: 'row', flex: 1 }}>
                   <Image
                     style={{ width: 110, height: 110 }}
-                    source={{ uri: this.state.calendar.moon.image + '?' + Math.random() }} />
+                    source={{ uri: this.state.data.calendar.moon.image + '?' + Math.random() }} />
                   <View style={{justifyContent:'center'}}>
-                    <Text style={style.header}>{this.state.calendar.moon.name}</Text>
-                    <Text style={style.header}>{this.state.calendar.moon.percent}</Text>
+                    <Text style={style.header}>{this.state.data.calendar.moon.name}</Text>
+                    <Text style={style.header}>{this.state.data.calendar.moon.percent}</Text>
                   </View>
                 </View>
                 <View style={{ flexDirection: 'row', flex: 1, paddingTop:10 }}>
                   <View style={{borderRightWidth: 1, borderRightColor: 'white', paddingRight:10}}>
-                    <Text style={[style.header2, { color: this.state.dailykin.color}]}>Tone: {this.state.dailykin.tone.number} {this.state.dailykin.tone.name}</Text>
-                    <Text style={style.text}>* { this.state.dailykin.tone.words.join('\n* ')}</Text>
+                    <Text style={[style.header2, { color: this.state.data.dailykin.color}]}>Tone: {this.state.data.dailykin.tone.number} {this.state.data.dailykin.tone.name}</Text>
+                    <Text style={style.text}>* { this.state.data.dailykin.tone.words.join('\n* ')}</Text>
                   </View>
                   <View style={{paddingLeft:10}}>
-                    <Text style={[style.header2, { color: this.state.dailykin.color}]}>Tribe: {this.state.dailykin.tribe.number} {this.state.dailykin.tribe.name}</Text>
-                    <Text style={style.text}>* { this.state.dailykin.tribe.words.join('\n* ')}</Text>
+                    <Text style={[style.header2, { color: this.state.data.dailykin.color}]}>Tribe: {this.state.data.dailykin.tribe.number} {this.state.data.dailykin.tribe.name}</Text>
+                    <Text style={style.text}>* { this.state.data.dailykin.tribe.words.join('\n* ')}</Text>
                   </View>
                 </View>
-                <Text style={[style.header2, { color: this.state.dailykin.color}]}>Affirmation</Text>
-                <Text style={[style.text, { textAlign: 'center' }]}>{this.state.dailykin.affirmation.join('\n')}</Text>
+                <Text style={[style.header2, { color: this.state.data.dailykin.color}]}>Affirmation</Text>
+                <Text style={[style.text, { textAlign: 'center' }]}>{this.state.data.dailykin.affirmation.join('\n')}</Text>
               </View>
             }
             </ScrollView>
@@ -267,14 +249,33 @@ export default class HomeScreen extends React.Component {
 
   fetchData(dayOffset=0) {
     this.setState({
-      isHomeLoading: true,
-      isCalendarLoading: true
+      isLoading: true
     });
     now = new Date();
     if (dayOffset != 0) {
-      now = new Date(Date.parse(this.state.dailykin.day));
+      now = new Date(Date.parse(this.state.data.dailykin.day));
       now.setDate(now.getDate() + dayOffset);
     }
+    
+    const data = require('./assets/data/dailykin-1.json');
+
+    this.setState({
+      isLoading: false,
+      data: data,
+      error: null
+    }, function() {
+      // callback
+      this.props.navigation.dangerouslyGetParent().dispatch(NavigationActions.setParams({
+        key: 'Reading',
+        params: { 
+          data: this.state.data,
+          error: null
+        }
+      }));
+    });
+
+    //FIXME: remove all this
+    /*
     dayQueryString = '?dcode_mo=' + (now.getMonth() + 1) + '&dcode_day=' + now.getDate() + '&dcode_yr=' + now.getFullYear() + '&decoder=decode';
     return Promise.all([
       // home
@@ -290,7 +291,7 @@ export default class HomeScreen extends React.Component {
             this.props.navigation.dangerouslyGetParent().dispatch(NavigationActions.setParams({
               key: 'Reading',
               params: { 
-                dailykin: this.state.dailykin,
+                dailykin: this.state.data.dailykin,
                 error: null
               }
             }));
@@ -330,6 +331,7 @@ export default class HomeScreen extends React.Component {
           console.info(error);
         })
     ]);
+*/
   }
 
 }
