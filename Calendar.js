@@ -1,14 +1,9 @@
 
 export default class Calendar {
 
-  //blue -> grey
-  //yellow -> gold
-  //red -> gold
-  //white -> grey
-
   GLYPHS = ['Dali', 'Seli', 'Gamma', 'Kali', 'Alpha', 'Limi', 'Sillio'];
 
-  COLORS = {
+  GLYPH_COLORS = {
     Dali: 'yellow',
     Seli: 'red',
     Gamma: 'white',
@@ -34,28 +29,58 @@ export default class Calendar {
     'Cosmic',
   ];
 
+  TONE_COLORS = {
+    'blue': 'grey',
+    'yellow': 'gold',
+    'red': 'gold',
+    'white': 'grey',
+  };
+
   TRIBES = [
-    'Red Dragon',
-    'White Wind',
-    'Blue Night',
-    'Yellow Seed',
-    'Red Serpent',
-    'White World-Bridger',
-    'Blue Hand',
-    'Yellow Star',
-    'Red Moon',
-    'White Dog',
-    'Blue Monkey',
-    'Yellow Human',
-    'Red Skywalker',
-    'White Wizard',
-    'Blue Eagle',
-    'Yellow Warrior',
-    'Red Earth',
-    'White Mirror',
-    'Blue Storm',
-    'Yellow Sun',
+    'Dragon',
+    'Wind',
+    'Night',
+    'Seed',
+    'Serpent',
+    'World-Bridger',
+    'Hand',
+    'Star',
+    'Moon',
+    'Dog',
+    'Monkey',
+    'Human',
+    'Skywalker',
+    'Wizard',
+    'Eagle',
+    'Warrior',
+    'Earth',
+    'Mirror',
+    'Storm',
+    'Sun',
   ];
+
+  TRIBE_COLORS = {
+    'Dragon': 'red',
+    'Wind': 'white',
+    'Night': 'blue',
+    'Seed': 'yellow',
+    'Serpent': 'red',
+    'World-Bridger': 'white',
+    'Hand': 'blue',
+    'Star': 'yellow',
+    'Moon': 'red',
+    'Dog': 'white',
+    'Monkey': 'blue',
+    'Human': 'yellow',
+    'Skywalker': 'red',
+    'Wizard': 'white',
+    'Eagle': 'blue',
+    'Warrior': 'yellow',
+    'Earth': 'red',
+    'Mirror': 'white',
+    'Storm': 'blue',
+    'Sun': 'yellow',
+  };
 
   START_DATE = new Date(Date.UTC(1900, 0, 1, 12, 0, 0));
   START_KIN = 52;
@@ -147,11 +172,21 @@ export default class Calendar {
 
     return {
       date: date,
-      kin: kin + 1,
-      tone: tone + 1 + ' ' + this.TONES[tone],
-      tribe: tribe + 1 + ' ' + this.TRIBES[tribe],
-      moon: moon + 1,
-      moonDay: moonDay + 1,
+      color: this.TRIBE_COLORS[this.TRIBES[tribe]],
+      kinNumber: kin + 1,
+      tone: {
+        number: tone + 1,
+        name: this.TONES[tone],
+        color: this.TONE_COLORS[this.TRIBE_COLORS[this.TRIBES[tribe]]]
+      },
+      tribe: {
+        number: tribe + 1,
+        name: this.TRIBES[tribe]
+      },
+      moon: {
+        number: moon + 1,
+        day: moonDay + 1
+      },
       glyph: glyph + 1 + ' ' + this.GLYPHS[glyph],
     };
   }

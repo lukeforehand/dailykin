@@ -132,10 +132,10 @@ export default class HomeScreen extends React.Component {
               <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Image
                   style={{ width: 160, height: 76 }}
-                  source={{ uri: this.state.data.dailykin.tone.image }} />
+                  source={this.loadToneImage(this.state.data.dailykin.tone.number, this.state.data.dailykin.tone.color)} />
                 <Image
                   style={{ width: 160, height: 160 }}
-                  source={{ uri: this.state.data.dailykin.tribe.image }} />
+                  source={this.loadTribeImage(this.state.data.dailykin.tribe.number)} />
                 <Text style={style.header}>{this.state.data.dailykin.day}</Text>
                 <Text style={[style.header, { fontSize: 24, color: this.state.data.dailykin.color}]}>{this.state.data.dailykin.name}</Text>
                 <Text style={style.text}>Guided by {this.state.data.calendar.guided}</Text>
@@ -143,7 +143,7 @@ export default class HomeScreen extends React.Component {
                 <View style={{ flexDirection: 'row', flex: 1 }}>
                   <Image
                     style={{ width: 110, height: 110 }}
-                    source={this.loadMoon(this.state.data.moon.name)} />
+                    source={this.loadMoonImage(this.state.data.moon.name)} />
                   <View style={{justifyContent:'center'}}>
                     <Text style={style.header}>{this.state.data.moon.name}</Text>
                     <Text style={style.header}>{this.state.data.moon.illuminated}</Text>
@@ -191,6 +191,19 @@ export default class HomeScreen extends React.Component {
 
       const data = this.loadKin(day);
       data.moon = new MoonPhase().phase(now);
+      data.dailykin.day = (day.date.getMonth() + 1) + '/' + day.date.getDate() + '/' + day.date.getFullYear();
+      data.dailykin.kinNumber = day.kinNumber;
+      data.dailykin.color = day.color;
+      data.dailykin.name = (day.color + ' ' + day.tribe.name + ' ' + day.tone.name).toUpperCase();
+      data.dailykin.tone.number = day.tone.number;
+      data.dailykin.tone.name = day.tone.name;
+      data.dailykin.tone.color = day.tone.color;
+      data.dailykin.tribe.number = day.tribe.number;
+      data.dailykin.tribe.name = day.tribe.name;
+      //TODO: glyph
+      //TODO: moon
+      //TODO: tone + words
+      //TODO: tribe + words
 
       this.setState({
         isLoading: false,
@@ -228,7 +241,7 @@ export default class HomeScreen extends React.Component {
   }
 
   loadKin(day) {
-    switch (day.kin) {
+    switch (day.kinNumber) {
       case 1: return require('./assets/data/dailykin-1.json');
       case 2: return require('./assets/data/dailykin-2.json');
       case 3: return require('./assets/data/dailykin-3.json');
@@ -493,7 +506,7 @@ export default class HomeScreen extends React.Component {
     }
   }
 
-  loadMoon(name) {
+  loadMoonImage(name) {
     switch (name) {
       case 'Waxing Gibbous': return require('./assets/images/moons/moon_waxg.png');
       case 'Waxing Crescent': return require('./assets/images/moons/moon_waxc.png');
@@ -506,4 +519,66 @@ export default class HomeScreen extends React.Component {
       default: throw new Error('Could not load moon image ' + name);
     }
   }
+
+  //FIXME:
+  loadToneImage(number, color) {
+    numberColor = number + '|' + color;
+    switch (numberColor) {
+      case '1|grey': return require('./assets/images/moons/moon_waxg.png');
+      case '1|gold': return require('./assets/images/moons/moon_waxg.png');
+      case '2|grey': return require('./assets/images/moons/moon_waxg.png');
+      case '2|gold': return require('./assets/images/moons/moon_waxg.png');
+      case '3|grey': return require('./assets/images/moons/moon_waxg.png');
+      case '3|gold': return require('./assets/images/moons/moon_waxg.png');
+      case '4|grey': return require('./assets/images/moons/moon_waxg.png');
+      case '4|gold': return require('./assets/images/moons/moon_waxg.png');
+      case '5|grey': return require('./assets/images/moons/moon_waxg.png');
+      case '5|gold': return require('./assets/images/moons/moon_waxg.png');
+      case '6|grey': return require('./assets/images/moons/moon_waxg.png');
+      case '6|gold': return require('./assets/images/moons/moon_waxg.png');
+      case '7|grey': return require('./assets/images/moons/moon_waxg.png');
+      case '7|gold': return require('./assets/images/moons/moon_waxg.png');
+      case '8|grey': return require('./assets/images/moons/moon_waxg.png');
+      case '8|gold': return require('./assets/images/moons/moon_waxg.png');
+      case '9|grey': return require('./assets/images/moons/moon_waxg.png');
+      case '9|gold': return require('./assets/images/moons/moon_waxg.png');
+      case '10|grey': return require('./assets/images/moons/moon_waxg.png');
+      case '10|gold': return require('./assets/images/moons/moon_waxg.png');
+      case '11|grey': return require('./assets/images/moons/moon_waxg.png');
+      case '11|gold': return require('./assets/images/moons/moon_waxg.png');
+      case '12|grey': return require('./assets/images/moons/moon_waxg.png');
+      case '12|gold': return require('./assets/images/moons/moon_waxg.png');
+      case '13|grey': return require('./assets/images/moons/moon_waxg.png');
+      case '13|gold': return require('./assets/images/moons/moon_waxg.png');
+      default: throw new Error('Could not load tone image ' + number);
+    }
+  }
+
+  //FIXME:
+  loadTribeImage(number) {
+    switch (number) {
+      case 1: return require('./assets/images/moons/moon_waxg.png');
+      case 2: return require('./assets/images/moons/moon_waxg.png');
+      case 3: return require('./assets/images/moons/moon_waxg.png');
+      case 4: return require('./assets/images/moons/moon_waxg.png');
+      case 5: return require('./assets/images/moons/moon_waxg.png');
+      case 6: return require('./assets/images/moons/moon_waxg.png');
+      case 7: return require('./assets/images/moons/moon_waxg.png');
+      case 8: return require('./assets/images/moons/moon_waxg.png');
+      case 9: return require('./assets/images/moons/moon_waxg.png');
+      case 10: return require('./assets/images/moons/moon_waxg.png');
+      case 11: return require('./assets/images/moons/moon_waxg.png');
+      case 12: return require('./assets/images/moons/moon_waxg.png');
+      case 13: return require('./assets/images/moons/moon_waxg.png');
+      case 14: return require('./assets/images/moons/moon_waxg.png');
+      case 15: return require('./assets/images/moons/moon_waxg.png');
+      case 16: return require('./assets/images/moons/moon_waxg.png');
+      case 17: return require('./assets/images/moons/moon_waxg.png');
+      case 18: return require('./assets/images/moons/moon_waxg.png');
+      case 19: return require('./assets/images/moons/moon_waxg.png');
+      case 20: return require('./assets/images/moons/moon_waxg.png');
+      default: throw new Error('Could not load tribe image ' + number);
+    }
+  }
+
 }
