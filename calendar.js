@@ -1,6 +1,11 @@
 
 var fs = require('fs');
 
+//blue -> grey
+//yellow -> gold
+//red -> gold
+//white -> grey
+
 glyphs = [
   'Dali',
   'Seli',
@@ -64,8 +69,9 @@ START_DATE = new Date(Date.UTC(1900, 0, 1, 12, 0, 0));
 START_KIN = 52;
 START_TONE = 0;
 START_TRIBE = 12;
-START_GLYPH = 4;
+START_MOON = 5;
 START_MOONDAY = 19;
+START_GLYPH = 4;
 
 function isLeapYear(year) {
   if (year % 4 != 0) {
@@ -79,49 +85,63 @@ function isLeapYear(year) {
   }
 }
 
-function leapYearsBetween(start, end) {
-  leapYears = 0;
-  for (i = start; i <= end; i++) {
+function leapDaysBetween(start, end) {
+  leapDays = 0;
+  for (var i = start; i <= end; i++) {
     if (isLeapYear(i)) {
-      leapYears++;
+      leapDays++;
     }
   }
-  return leapYears;
+  return leapDays;
 }
 
-function calculate(dayOffset=0) {
-  now = new Date();
-  now = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0));
-  now.setDate(now.getDate() + dayOffset);
-  //now = new Date(Date.UTC(2026, 9, 22, 12, 0, 0));
-  //now = new Date(Date.UTC(2102, 3, 12, 12, 0, 0));
-  days = Math.round((now.getTime() - START_DATE.getTime()) / (24 * 60 * 60 * 1000));
-  leapYears = leapYearsBetween(START_DATE.getFullYear(), now.getFullYear());
-  years = now.getFullYear() - START_DATE.getFullYear();
-  days = (days - leapYears);
-  tribe = parseInt((days + START_TRIBE) % 20);
-  tone = parseInt((days + START_TONE) % 13);
-  kin = parseInt((days + START_KIN) % 260);
-  //TODO: these don't work yet
-  //TODO: if the NOW day is before Feb 29th, then subtract one from the
-  // leapyear count.  if the NOW day is before July 25, then subtract one
-  // from the year count
-  //TODO: write a unit test based on space plaza
-  moonDay = parseInt(((days + START_MOONDAY) - years) % 28);
-  glyph = parseInt(moonDay % 7);
+function calculateDay(date, dayOffset=0) {
+  // set date to UTC at noon
+  date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0, 0));
+  date.setDate(date.getDate() + dayOffset);
+
+  // calculate days since first known kin day
+  days = Math.round((date.getTime() - START_DATE.getTime()) / (24 * 60 * 60 * 1000));
+
+  // calculate leap days which must be subtracted from the days since first known kin
+  leapDays = leapDaysBetween(START_DATE.getFullYear(), date.getFullYear());
+  if (date.getTime() < new Date(Date.UTC(date.getFullYear(), 1, 29, 12, 0, 0)).getTime()) {
+    // date is before Feb 29, so the year's leap day hasn't happened yet
+    leapDays = leapDays - 1;
+  }
+  days = (days - leapDays);
+
+  tribe = (days + START_TRIBE) % 20;
+  tone = (days + START_TONE) % 13;
+  kin = (days + START_KIN) % 260;
+
+  // calculate the years since first known kin day
+  years = date.getFullYear() - START_DATE.getFullYear();
+  if (date.getTime() > new Date(Date.UTC(date.getFullYear(), 6, 25, 12, 0, 0)).getTime()) {
+    // date is after July 25, the start of a new galactic year
+    years = years + 1;
+  }
+
+  // calculate how many moons this year has seen up to the date
+  moon = (Math.floor(((days + START_MOONDAY) - years) / 28) + START_MOON) % 13;
+  // calculate the day of the current moon
+  moonDay = ((days + START_MOONDAY) - years) % 28;
+  glyph = moonDay % 7;
 
   return {
-    date: now,
+    date: date,
     kin: kin + 1,
     tone: tone + 1 + ' ' + tones[tone],
     tribe: tribe + 1 + ' ' + tribes[tribe],
+    moon: moon + 1,
     moonDay: moonDay + 1,
     glyph: glyph + 1 + ' ' + glyphs[glyph]
   };
 
 }
 
-i = 0;
-//for (i=0; i < 30; i++) {
-  console.info(calculate(i));
-//}
+//date = new Date();
+date = new Date(2498, 9, 22);
+for (var i=0; i < 60; i++) {
+  console.info(calculateDay(date, i));
+}
