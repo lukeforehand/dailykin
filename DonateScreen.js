@@ -119,7 +119,7 @@ export default class DonateScreen extends React.Component {
           <ImageBackground
             resizeMode='stretch'
             style={{width: '100%', height: '100%'}}
-            source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
+            source={require('./assets/images/space.jpg')}>
             <View style={{ flex: 1, justifyContent: 'center' }}>
               <ActivityIndicator size='large' />
             </View>
@@ -133,7 +133,7 @@ export default class DonateScreen extends React.Component {
         <ImageBackground
             resizeMode='stretch'
             style={{width: '100%', height: '100%'}}
-            source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
+            source={require('./assets/images/space.jpg')}>
           <ScrollView>
             <Text style={style.text}>
               {'\n'}If you appreciate this app please consider donating to the developer.{'\n'}

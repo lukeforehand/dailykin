@@ -36,7 +36,7 @@ export default class ReadingScreen extends React.Component {
           <ImageBackground
             resizeMode='stretch'
             style={{width: '100%', height: '100%'}}
-            source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
+            source={require('./assets/images/space.jpg')}>
             <View style={{ flex: 1, justifyContent: 'center' }}>
               <ActivityIndicator size='large' />
             </View>
@@ -50,7 +50,7 @@ export default class ReadingScreen extends React.Component {
         <ImageBackground
             resizeMode='stretch'
             style={{width: '100%', height: '100%'}}
-            source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
+            source={require('./assets/images/space.jpg')}>
           <ScrollView>
           {this.props.navigation.dangerouslyGetParent().getParam('error') ?
             <View>

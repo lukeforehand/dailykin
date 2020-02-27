@@ -91,7 +91,7 @@ export default class HomeScreen extends React.Component {
           <ImageBackground
             resizeMode='stretch'
             style={{width: '100%', height: '100%'}}
-            source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
+            source={require('./assets/images/space.jpg')}>
             <View style={{ flex: 1, justifyContent: 'center' }}>
               <ActivityIndicator size='large' />
             </View>
@@ -104,7 +104,7 @@ export default class HomeScreen extends React.Component {
         <ImageBackground
             resizeMode='stretch'
             style={{width: '100%', height: '100%'}}
-            source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
+            source={require('./assets/images/space.jpg')}>
           <Icon name='arrow-left' color='grey' size={30} style={{position:'absolute', left:0, top:140, zIndex:1}} />
           <Icon name='arrow-right' color='grey' size={30} style={{position:'absolute', left:windowWidth - 30, top:140, zIndex:1}} />
           <FlingGestureHandler

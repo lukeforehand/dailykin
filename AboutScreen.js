@@ -17,7 +17,7 @@ export default class AboutScreen extends React.Component {
         <ImageBackground
           resizeMode='stretch'
           style={{width: '100%', height: '100%'}}
-          source={{ uri: 'https://spacestationplaza.com/images/space.jpg' }}>
+          source={require('./assets/images/space.jpg')}>
           <ScrollView>
             <Text style={style.text}>
               {'\n'}Tzolkin, meaning the 'Count of Days' in Yucatecan, is the Sacred Mayan Calendar that was utilized by Mayan priests for ceremonies, rituals and divination purposes. This sacred calendar was followed by several Mesoamerican cultures and, although expressed with different names, they all consisted of a combination of 20 symbols by 13 numbers. The Cholq'ij, its name in Quiche, is still in use by the Day Keepers in Mayan communities of Highland Guatemala.
