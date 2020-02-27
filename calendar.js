@@ -1,6 +1,4 @@
 
-var fs = require('fs');
-
 //blue -> grey
 //yellow -> gold
 //red -> gold
@@ -139,6 +137,9 @@ function calculateDay(date, dayOffset=0) {
   };
 
 }
+
+
+
 
 //date = new Date();
 date = new Date(2498, 9, 22);
