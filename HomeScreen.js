@@ -143,10 +143,10 @@ export default class HomeScreen extends React.Component {
                 <View style={{ flexDirection: 'row', flex: 1 }}>
                   <Image
                     style={{ width: 110, height: 110 }}
-                    source={{ uri: this.state.data.calendar.moon.image + '?' + Math.random() }} />
+                    source={this.loadMoon(this.state.data.moon.name)} />
                   <View style={{justifyContent:'center'}}>
-                    <Text style={style.header}>{this.state.data.calendar.moon.name}</Text>
-                    <Text style={style.header}>{this.state.data.calendar.moon.percent}</Text>
+                    <Text style={style.header}>{this.state.data.moon.name}</Text>
+                    <Text style={style.header}>{this.state.data.moon.illuminated}</Text>
                   </View>
                 </View>
                 <View style={{ flexDirection: 'row', flex: 1, paddingTop:10 }}>
@@ -490,6 +490,20 @@ export default class HomeScreen extends React.Component {
       case 259: return require('./assets/data/dailykin-259.json');
       case 260: return require('./assets/data/dailykin-260.json');
       default: throw new Error('Could not load ' + (day.date.getMonth() + 1) + '/' + day.date.getDate() + '/' + day.date.getFullYear());
+    }
+  }
+
+  loadMoon(name) {
+    switch (name) {
+      case 'Waxing Gibbous': return require('./assets/images/moons/moon_waxg.png');
+      case 'Waxing Crescent': return require('./assets/images/moons/moon_waxc.png');
+      case 'Waning Gibbous': return require('./assets/images/moons/moon_wang.png');
+      case 'Waning Crescent': return require('./assets/images/moons/moon_wanc.png');
+      case 'New Moon': return require('./assets/images/moons/moon_new.png');
+      case 'Last Quarter': return require('./assets/images/moons/moon_lq.png');
+      case 'Full Moon': return require('./assets/images/moons/moon_full.png');
+      case 'First Quarter': return require('./assets/images/moons/moon_fq.png');
+      default: throw new Error('Could not load moon image ' + name);
     }
   }
 }

@@ -22,15 +22,15 @@ export default class MoonPhase {
   synodic_month = 29.53058868;
 
   phase_strings = {
-    0.05: 'new moon',
-    0.20: 'waxing crescent',
-    0.30: 'first quarter',
-    0.45: 'waxing gibbous',
-    0.55: 'full moon',
-    0.70: 'waning gibbous',
-    0.80: 'last quarter',
-    0.95: 'waning crescent',
-    1.05: 'new moon',
+    0.05: 'New Moon',
+    0.20: 'Waxing Crescent',
+    0.30: 'First Quarter',
+    0.45: 'Waxing Gibbous',
+    0.55: 'Full Moon',
+    0.70: 'Waning Gibbous',
+    0.80: 'Last Quarter',
+    0.95: 'Waning Crescent',
+    1.05: 'New Moon',
   };
 
   juliandate(date) {
@@ -140,7 +140,7 @@ export default class MoonPhase {
       age: (this.synodic_month * this.fixangle(moon_age)) / 360.0,
       phase: phase,
       name: phase_name,
-      illuminated: moon_phase,
+      illuminated: (moon_phase * 100).toFixed(1) + '%',
     };
 
   }
