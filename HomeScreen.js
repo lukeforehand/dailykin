@@ -153,7 +153,10 @@ export default class HomeScreen extends React.Component {
                   <Text style={[style.header2, {color: this.state.data.day.color, paddingRight:8 }]}>{this.state.data.day.glyph}</Text>
                   <Text style={style.header}>{this.state.data.day.moon.name.toUpperCase()} {this.state.data.day.moon.day}</Text>
                 </View>
-                <Text style={style.header}>{this.state.data.day.date}</Text>
+                <View style={{ flexDirection: 'row', flex: 1 }}>
+                  <Text style={style.header}>{this.state.data.day.date} | </Text>
+                  <Text style={style.header}>{this.state.data.day.longCount}</Text>
+                </View>
                 <Text style={[style.header, { fontSize: 24, color: this.state.data.day.color}]}>{this.state.data.day.name}</Text>
                 <Text style={style.text}>Guided by {this.state.data.day.guide}</Text>
                 <Text style={[style.header2, { color: this.state.data.day.color}]}>Kin {this.state.data.day.kinNumber}</Text>

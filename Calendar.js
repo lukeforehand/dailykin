@@ -122,6 +122,7 @@ export default class Calendar {
   };
 
   START_DATE = new Date(Date.UTC(1900, 0, 1, 12, 0, 0));
+  START_LONGCOUNT = new Date(Date.UTC(1987, 6, 25, 12, 0, 0));
   START_KIN = 52;
   START_TONE = 0;
   START_TRIBE = 12;
@@ -215,6 +216,8 @@ export default class Calendar {
       name: (this.TRIBE_COLORS[this.TRIBES[tribe]] + ' ' + this.TONES[tone] + ' ' + this.TRIBES[tribe]).toUpperCase(),
       color: this.TRIBE_COLORS[this.TRIBES[tribe]],
       kinNumber: kin + 1,
+      longCount: 'NS' + Math.floor(1 + (date.getFullYear() - this.START_LONGCOUNT.getFullYear()) / 52) + '.' + (date.getFullYear() - this.START_LONGCOUNT.getFullYear() - (date.getTime() <
+      new Date(Date.UTC(date.getFullYear(), 1, 29, 12, 0, 0)).getTime() ? 1 : 0)) + '.' + (moonTone + 1) + '.' + (moonDay + 1),
       tone: {
         number: tone + 1,
         name: this.TONES[tone],

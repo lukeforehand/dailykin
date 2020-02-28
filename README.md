@@ -51,6 +51,9 @@ In the 13 Moon Calendar each moon lasts 28-days with 4 7-day weeks.  The 7 days 
 * Limi - Solar Plexus
 * Silio - Heart
 
+### NS1.32.8.22
+Numbering of the days.  NS stands for "New Sirius", the 52-year cycle which is how long it takes Sirius B to orbit Sirius A.  The numbering is defined as follows: (1) NS cycles, (32) years, (8) months, (22) days since the beginning of the calendar.
+
 ### BLUE PLANETARY MONKEY - Kin 231
 
 Galactic Signature (BLUE PLANETARY MONKEY) and Kin day (231).
