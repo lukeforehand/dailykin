@@ -39,8 +39,8 @@ export default class Calendar {
     'Resonant': ['Inspiring','Attunement','Channel'],
     'Galactic': ['Modeling','Integrity','Harmonize'],
     'Solar': ['Realizing','Intention','Pulse'],
-    'Spectral': ['Producing','Manifestation','Perfect'],
-    'Planetary': ['Releasing','Liberation','Dissolve'],
+    'Spectral': ['Releasing','Liberation','Dissolve'],
+    'Planetary': ['Producing','Manifestation','Perfect'],
     'Crystal': ['Universalizing','Cooperation','Dedicate'],
     'Cosmic': ['Transcending','Presence','Endure']
   };
