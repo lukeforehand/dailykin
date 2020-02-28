@@ -41,7 +41,7 @@ export default StyleSheet.create({
   about: {
     color: '#C1CDCD',
     textAlign: 'left',
-    fontWeight: 'bold',
+    fontWeight: 'normal',
     marginLeft: '5%',
     marginRight: '5%',
     paddingTop: 10,
