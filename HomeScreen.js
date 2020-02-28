@@ -124,9 +124,20 @@ export default class HomeScreen extends React.Component {
                 <RefreshControl tintColor='transparent' refreshing={this.refreshing()} onRefresh={this.fetchData.bind(this)} />
               }
             >
-            {this.state.error ?
-              <View style={{ height: 600, paddingTop:10 }}>
-                <Text style={style.text}>{this.state.error.message}</Text>
+            {this.state.data.day.gad ?
+              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={style.header2}>{this.state.data.day.date}</Text>
+                <Text style={style.text}>{this.state.data.day.gad}</Text>
+                <View style={{ flexDirection: 'row', flex: 1 }}>
+                  <Image
+                    style={{ width: 110, height: 110 }}
+                    source={this.loadMoonImage(this.state.data.moon.name)} />
+                  <View style={{justifyContent:'center'}}>
+                    <Text style={style.header}>{this.state.data.moon.name}</Text>
+                    <Text style={style.header}>{this.state.data.moon.illuminated}</Text>
+                  </View>
+                </View>
+                <View style={{height:600}} />
               </View>
             :
               <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -191,13 +202,10 @@ export default class HomeScreen extends React.Component {
     try {
 
       var day = new Calendar().calculateDay(now);
-      if (day.error) {
-        throw new Error(day.error);
-      }
       var data = {
         day: day,
         moon: new MoonPhase().phase(now),
-        readings: this.loadReadings(day)
+        readings: day.gad ? undefined : this.loadReadings(day)
       };
 
       this.setState({
