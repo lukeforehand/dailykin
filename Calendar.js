@@ -30,10 +30,10 @@ export default class Calendar {
   ];
 
   TONE_COLORS = {
-    'blue': 'grey',
+    'blue': 'silver',
     'yellow': 'gold',
     'red': 'gold',
-    'white': 'grey',
+    'white': 'silver',
   };
 
   TRIBES = [

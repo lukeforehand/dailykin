@@ -520,63 +520,61 @@ export default class HomeScreen extends React.Component {
     }
   }
 
-  //FIXME:
   loadToneImage(number, color) {
     numberColor = number + '|' + color;
     switch (numberColor) {
-      case '1|grey': return require('./assets/images/moons/moon_waxg.png');
-      case '1|gold': return require('./assets/images/moons/moon_waxg.png');
-      case '2|grey': return require('./assets/images/moons/moon_waxg.png');
-      case '2|gold': return require('./assets/images/moons/moon_waxg.png');
-      case '3|grey': return require('./assets/images/moons/moon_waxg.png');
-      case '3|gold': return require('./assets/images/moons/moon_waxg.png');
-      case '4|grey': return require('./assets/images/moons/moon_waxg.png');
-      case '4|gold': return require('./assets/images/moons/moon_waxg.png');
-      case '5|grey': return require('./assets/images/moons/moon_waxg.png');
-      case '5|gold': return require('./assets/images/moons/moon_waxg.png');
-      case '6|grey': return require('./assets/images/moons/moon_waxg.png');
-      case '6|gold': return require('./assets/images/moons/moon_waxg.png');
-      case '7|grey': return require('./assets/images/moons/moon_waxg.png');
-      case '7|gold': return require('./assets/images/moons/moon_waxg.png');
-      case '8|grey': return require('./assets/images/moons/moon_waxg.png');
-      case '8|gold': return require('./assets/images/moons/moon_waxg.png');
-      case '9|grey': return require('./assets/images/moons/moon_waxg.png');
-      case '9|gold': return require('./assets/images/moons/moon_waxg.png');
-      case '10|grey': return require('./assets/images/moons/moon_waxg.png');
-      case '10|gold': return require('./assets/images/moons/moon_waxg.png');
-      case '11|grey': return require('./assets/images/moons/moon_waxg.png');
-      case '11|gold': return require('./assets/images/moons/moon_waxg.png');
-      case '12|grey': return require('./assets/images/moons/moon_waxg.png');
-      case '12|gold': return require('./assets/images/moons/moon_waxg.png');
-      case '13|grey': return require('./assets/images/moons/moon_waxg.png');
-      case '13|gold': return require('./assets/images/moons/moon_waxg.png');
+      case '1|silver': return require('./assets/images/tones/1s.png');
+      case '1|gold': return require('./assets/images/tones/1g.png');
+      case '2|silver': return require('./assets/images/tones/2s.png');
+      case '2|gold': return require('./assets/images/tones/2g.png');
+      case '3|silver': return require('./assets/images/tones/3s.png');
+      case '3|gold': return require('./assets/images/tones/3g.png');
+      case '4|silver': return require('./assets/images/tones/4s.png');
+      case '4|gold': return require('./assets/images/tones/4g.png');
+      case '5|silver': return require('./assets/images/tones/5s.png');
+      case '5|gold': return require('./assets/images/tones/5g.png');
+      case '6|silver': return require('./assets/images/tones/6s.png');
+      case '6|gold': return require('./assets/images/tones/6g.png');
+      case '7|silver': return require('./assets/images/tones/7s.png');
+      case '7|gold': return require('./assets/images/tones/7g.png');
+      case '8|silver': return require('./assets/images/tones/8s.png');
+      case '8|gold': return require('./assets/images/tones/8g.png');
+      case '9|silver': return require('./assets/images/tones/9s.png');
+      case '9|gold': return require('./assets/images/tones/9g.png');
+      case '10|silver': return require('./assets/images/tones/10s.png');
+      case '10|gold': return require('./assets/images/tones/10g.png');
+      case '11|silver': return require('./assets/images/tones/11s.png');
+      case '11|gold': return require('./assets/images/tones/11g.png');
+      case '12|silver': return require('./assets/images/tones/12s.png');
+      case '12|gold': return require('./assets/images/tones/12g.png');
+      case '13|silver': return require('./assets/images/tones/13s.png');
+      case '13|gold': return require('./assets/images/tones/13g.png');
       default: throw new Error('Could not load tone image ' + number);
     }
   }
 
-  //FIXME:
   loadTribeImage(number) {
     switch (number) {
-      case 1: return require('./assets/images/moons/moon_waxg.png');
-      case 2: return require('./assets/images/moons/moon_waxg.png');
-      case 3: return require('./assets/images/moons/moon_waxg.png');
-      case 4: return require('./assets/images/moons/moon_waxg.png');
-      case 5: return require('./assets/images/moons/moon_waxg.png');
-      case 6: return require('./assets/images/moons/moon_waxg.png');
-      case 7: return require('./assets/images/moons/moon_waxg.png');
-      case 8: return require('./assets/images/moons/moon_waxg.png');
-      case 9: return require('./assets/images/moons/moon_waxg.png');
-      case 10: return require('./assets/images/moons/moon_waxg.png');
-      case 11: return require('./assets/images/moons/moon_waxg.png');
-      case 12: return require('./assets/images/moons/moon_waxg.png');
-      case 13: return require('./assets/images/moons/moon_waxg.png');
-      case 14: return require('./assets/images/moons/moon_waxg.png');
-      case 15: return require('./assets/images/moons/moon_waxg.png');
-      case 16: return require('./assets/images/moons/moon_waxg.png');
-      case 17: return require('./assets/images/moons/moon_waxg.png');
-      case 18: return require('./assets/images/moons/moon_waxg.png');
-      case 19: return require('./assets/images/moons/moon_waxg.png');
-      case 20: return require('./assets/images/moons/moon_waxg.png');
+      case 1: return require('./assets/images/tribes/01.png');
+      case 2: return require('./assets/images/tribes/02.png');
+      case 3: return require('./assets/images/tribes/03.png');
+      case 4: return require('./assets/images/tribes/04.png');
+      case 5: return require('./assets/images/tribes/05.png');
+      case 6: return require('./assets/images/tribes/06.png');
+      case 7: return require('./assets/images/tribes/07.png');
+      case 8: return require('./assets/images/tribes/08.png');
+      case 9: return require('./assets/images/tribes/09.png');
+      case 10: return require('./assets/images/tribes/10.png');
+      case 11: return require('./assets/images/tribes/11.png');
+      case 12: return require('./assets/images/tribes/12.png');
+      case 13: return require('./assets/images/tribes/13.png');
+      case 14: return require('./assets/images/tribes/14.png');
+      case 15: return require('./assets/images/tribes/15.png');
+      case 16: return require('./assets/images/tribes/16.png');
+      case 17: return require('./assets/images/tribes/17.png');
+      case 18: return require('./assets/images/tribes/18.png');
+      case 19: return require('./assets/images/tribes/19.png');
+      case 20: return require('./assets/images/tribes/20.png');
       default: throw new Error('Could not load tribe image ' + number);
     }
   }
