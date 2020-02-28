@@ -58,10 +58,10 @@ export default class ReadingScreen extends React.Component {
             </View>
           :
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <Text style={[style.header, { fontSize: 24, color: this.props.navigation.dangerouslyGetParent().getParam('data').dailykin.color}]}>
-                {this.props.navigation.dangerouslyGetParent().getParam('data').dailykin.name}
+              <Text style={[style.header, { fontSize: 24, color: this.props.navigation.dangerouslyGetParent().getParam('data').day.color}]}>
+                {this.props.navigation.dangerouslyGetParent().getParam('data').day.name}
               </Text>
-              <Text style={style.text}>{'\n' + this.props.navigation.dangerouslyGetParent().getParam('data').dailykin.reading.join('\n\n')}</Text>
+              <Text style={style.text}>{'\n' + this.props.navigation.dangerouslyGetParent().getParam('data').readings.reading.join('\n\n')}</Text>
             </View>
           }
           </ScrollView>
