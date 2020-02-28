@@ -45,6 +45,8 @@ export default class ReadingScreen extends React.Component {
       )
     }
 
+    const data = this.props.navigation.dangerouslyGetParent().getParam('data');
+
     return(
       <SafeAreaView>
         <ImageBackground
@@ -52,16 +54,14 @@ export default class ReadingScreen extends React.Component {
             style={{width: '100%', height: '100%'}}
             source={require('./assets/images/space.jpg')}>
           <ScrollView>
-          {this.props.navigation.dangerouslyGetParent().getParam('data').day.gad ?
+          {data.gad ?
             <View style={{ height: 600, paddingTop: 10 }}>
-              <Text style={style.text}>{this.props.navigation.dangerouslyGetParent().getParam('data').day.gad}</Text>
+              <Text style={style.readingtext}>{data.gad}</Text>
             </View>
           :
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <Text style={[style.header, { fontSize: 24, color: this.props.navigation.dangerouslyGetParent().getParam('data').day.color}]}>
-                {this.props.navigation.dangerouslyGetParent().getParam('data').day.name}
-              </Text>
-              <Text style={style.text}>{'\n' + this.props.navigation.dangerouslyGetParent().getParam('data').readings.reading.join('\n\n')}</Text>
+              <Text style={[style.header, { fontSize: 24, color: data.color}]}>{data.name}</Text>
+              <Text style={style.readingtext}>{'\n' + data.readings.reading.join('\n\n')}</Text>
             </View>
           }
           </ScrollView>

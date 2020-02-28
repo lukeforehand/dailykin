@@ -28,6 +28,30 @@ export default StyleSheet.create({
     fontSize: 16,
     fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
   },
+  readingtext: {
+    color: '#C1CDCD',
+    textAlign: 'left',
+    fontWeight: 'normal',
+    marginLeft: '5%',
+    marginRight: '5%',
+    lineHeight: 24,
+    fontSize: 18,
+    fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
+  },
+  about: {
+    color: '#C1CDCD',
+    textAlign: 'left',
+    fontWeight: 'bold',
+    marginLeft: '5%',
+    marginRight: '5%',
+    lineHeight: 24,
+    fontSize: 18,
+    fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular',
+    paddingTop: 10
+  },
+  abouthl: {
+    color: 'red'
+  },
   button: {
     borderColor: '#C1CDCD',
     borderWidth: 1,
