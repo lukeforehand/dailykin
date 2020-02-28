@@ -23,8 +23,8 @@ export default class Calendar {
     'Resonant',
     'Galactic',
     'Solar',
-    'Spectral',
     'Planetary',
+    'Spectral',
     'Crystal',
     'Cosmic',
   ];
@@ -192,6 +192,7 @@ export default class Calendar {
     tribe = (days + this.START_TRIBE) % 20;
     tone = (days + this.START_TONE) % 13;
     kin = (days + this.START_KIN) % 260;
+    guide = ((tone * 13) + (tribe - tone)) % 20;
 
     // calculate the years since first known kin day
     years = date.getFullYear() - this.START_DATE.getFullYear();
@@ -231,6 +232,7 @@ export default class Calendar {
         words: this.TONE_WORDS[this.TONES[moonTone]]
       },
       glyph: this.GLYPHS[glyph],
+      guide: this.TRIBE_WORDS[this.TRIBES[guide]][2]
     };
   }
 }

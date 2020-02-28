@@ -144,7 +144,7 @@ export default class HomeScreen extends React.Component {
                 </View>
                 <Text style={style.header}>{this.state.data.dailykin.day}</Text>
                 <Text style={[style.header, { fontSize: 24, color: this.state.data.dailykin.color}]}>{this.state.data.dailykin.name}</Text>
-                <Text style={style.text}>Guided by {this.state.data.calendar.guided}</Text>
+                <Text style={style.text}>Guided by {this.state.data.dailykin.guide}</Text>
                 <Text style={[style.header2, { color: this.state.data.dailykin.color}]}>Kin {this.state.data.dailykin.kinNumber}</Text>
                 <View style={{ flexDirection: 'row', flex: 1 }}>
                   <Image
@@ -195,16 +195,17 @@ export default class HomeScreen extends React.Component {
         throw new Error(day.error);
       }
 
-      const data = this.loadKin(day);
+      const data = this.loadContent(day);
       data.moon = new MoonPhase().phase(now);
       data.dailykin.day = day.date.toString().split(' ')[0] + ' ' + day.date.toString().split(' ')[1] + ' ' + day.date.toString().split(' ')[2] + ', ' + day.date.toString().split(' ')[3];
       data.dailykin.kinNumber = day.kinNumber;
       data.dailykin.color = day.color;
-      data.dailykin.name = (day.color + ' ' + day.tribe.name + ' ' + day.tone.name).toUpperCase();
+      data.dailykin.name = (day.color + ' ' + day.tone.name + ' ' + day.tribe.name).toUpperCase();
       data.dailykin.tone = day.tone;
       data.dailykin.tribe = day.tribe;
       data.dailykin.moon = day.moon;
       data.dailykin.glyph = day.glyph;
+      data.dailykin.guide = day.guide;
 
       this.setState({
         isLoading: false,
@@ -241,7 +242,7 @@ export default class HomeScreen extends React.Component {
     }
   }
 
-  loadKin(day) {
+  loadContent(day) {
     switch (day.kinNumber) {
       case 1: return require('./assets/data/dailykin-1.json');
       case 2: return require('./assets/data/dailykin-2.json');
