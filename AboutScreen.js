@@ -77,7 +77,7 @@ export default class AboutScreen extends React.Component {
 
               <Text style={style.about}>
                 Galactic Tone <Text style={style.abouthl}>{data.tone.number} {data.tone.name}</Text> and Solar Tribe <Text style={style.abouthl}>{data.tribe.number} {data.tribe.name}</Text>.{'\n\n'}
-                13 Galactic Tones and 20 Solar Tribes describe the process of cosmic creation.  The 13 Galactic Tones are represented by dots and bars.  The Solar Tribes are universal energies which symbolize archetypal aspects of our being.{'\n\n'}
+                13 Galactic Tones and 20 Solar Tribes describe the process of cosmic creation.  The 13 Galactic Tones are divine pulsations that support our becoming conscious of our divine inner frequency.  The Solar Tribes are universal energies which symbolize archetypal aspects of our being.{'\n\n'}
                 'Energy flows where Attention goes' ... Once you become aware of your own energies and you follow the cycle, you will be living in the present moment and start experiencing increasing synchronicities and magic in your life!
               </Text>
 
