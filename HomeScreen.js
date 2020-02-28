@@ -124,22 +124,7 @@ export default class HomeScreen extends React.Component {
                 <RefreshControl tintColor='transparent' refreshing={this.refreshing()} onRefresh={this.fetchData.bind(this)} />
               }
             >
-            {this.state.data.day.gad ?
-              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={style.header2}>{this.state.data.day.date}</Text>
-                <Text style={style.text}>{this.state.data.day.gad}</Text>
-                <View style={{ flexDirection: 'row', flex: 1 }}>
-                  <Image
-                    style={{ width: 110, height: 110 }}
-                    source={this.loadMoonImage(this.state.data.moon.name)} />
-                  <View style={{justifyContent:'center'}}>
-                    <Text style={style.header}>{this.state.data.moon.name}</Text>
-                    <Text style={style.header}>{this.state.data.moon.illuminated}</Text>
-                  </View>
-                </View>
-                <View style={{height:600}} />
-              </View>
-            :
+              { !this.state.data.day.gad ?
               <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={[style.header2, {color: this.state.data.day.color }]}>{this.state.data.day.moon.name.toUpperCase()} MOON {this.state.data.day.moon.number}</Text>
                 <Text style={style.header2}>{ this.state.data.day.moon.words.join(' * ')}</Text>
@@ -157,9 +142,26 @@ export default class HomeScreen extends React.Component {
                   <Text style={style.header}>{this.state.data.day.date} | </Text>
                   <Text style={style.header}>{this.state.data.day.longCount}</Text>
                 </View>
+              </View>
+              :
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <Text style={style.header2}>{this.state.data.day.date}</Text>
+                <Text style={style.text}>{this.state.data.day.gad}</Text>
+              </View>
+              }
+              { this.state.data.day.dot &&
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <Text style={style.header2}>{this.state.data.day.dot}</Text>
+              </View>
+              }
+              { !this.state.data.day.gad &&
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={[style.header, { fontSize: 24, color: this.state.data.day.color}]}>{this.state.data.day.name}</Text>
                 <Text style={style.text}>Guided by {this.state.data.day.guide}</Text>
                 <Text style={[style.header2, { color: this.state.data.day.color}]}>Kin {this.state.data.day.kinNumber}</Text>
+              </View>
+              }
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <View style={{ flexDirection: 'row', flex: 1 }}>
                   <Image
                     style={{ width: 110, height: 110 }}
@@ -169,6 +171,9 @@ export default class HomeScreen extends React.Component {
                     <Text style={style.header}>{this.state.data.moon.illuminated}</Text>
                   </View>
                 </View>
+              </View>
+              { !this.state.data.day.gad ?
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <View style={{ flexDirection: 'row', flex: 1, paddingTop:10 }}>
                   <View style={{borderRightWidth: 1, borderRightColor: 'white', paddingRight:10}}>
                     <Text style={[style.header2, { color: this.state.data.day.color}]}>Tone: {this.state.data.day.tone.number} {this.state.data.day.tone.name}</Text>
@@ -182,7 +187,11 @@ export default class HomeScreen extends React.Component {
                 <Text style={[style.header2, { color: this.state.data.day.color}]}>Affirmation</Text>
                 <Text style={[style.text, { textAlign: 'center' }]}>{this.state.data.readings.affirmation.join('\n')}</Text>
               </View>
-            }
+              :
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{height:600}} />
+              </View>
+              }
             </ScrollView>
             </Animated.View>
           </FlingGestureHandler>

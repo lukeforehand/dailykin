@@ -166,13 +166,6 @@ export default class Calendar {
         gad: '0.0.Hunab ku, which is another name for LEAP DAY, is technically missing from the calendar.'
       };
     }
-    if (date.getMonth() == 6 && date.getDate() == 25) {
-      // Day out of time
-      return {
-        date: date.toString().split(' ')[0] + ' ' + date.toString().split(' ')[1] + ' ' + date.toString().split(' ')[2] + ', ' + date.toString().split(' ')[3],
-        gad: 'Day out of time, the day prior to the 13-Moon New Year, is technically missing from the calendar.  It is a time for great celebration!'
-      };
-    }
 
     // calculate days since first known kin day
     days = Math.round(
@@ -216,8 +209,8 @@ export default class Calendar {
       name: (this.TRIBE_COLORS[this.TRIBES[tribe]] + ' ' + this.TONES[tone] + ' ' + this.TRIBES[tribe]).toUpperCase(),
       color: this.TRIBE_COLORS[this.TRIBES[tribe]],
       kinNumber: kin + 1,
-      longCount: 'NS' + Math.floor(1 + (date.getFullYear() - this.START_LONGCOUNT.getFullYear()) / 52) + '.' + (date.getFullYear() - this.START_LONGCOUNT.getFullYear() - (date.getTime() <
-      new Date(Date.UTC(date.getFullYear(), 1, 29, 12, 0, 0)).getTime() ? 1 : 0)) + '.' + (moonTone + 1) + '.' + (moonDay + 1),
+      longCount: 'NS' + Math.floor(1 + (date.getFullYear() - this.START_LONGCOUNT.getFullYear()) / 52) + '.' + (date.getFullYear() - this.START_LONGCOUNT.getFullYear() - (date.getTime() < new Date(Date.UTC(date.getFullYear(), 1, 29, 12, 0, 0)).getTime() ? 1 : 0)) + '.' + (moonTone + 1) + '.' + (moonDay + 1),
+      dot: date.getMonth() == 6 && date.getDate() == 25 ? 'Day out of time!  It is a time for great celebration!': undefined,
       tone: {
         number: tone + 1,
         name: this.TONES[tone],
