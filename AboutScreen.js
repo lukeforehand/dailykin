@@ -56,17 +56,24 @@ export default class AboutScreen extends React.Component {
           <ScrollView>
             { !data.gad ?
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <Text style={[style.header2, {color: data.color }]}>{data.moon.name.toUpperCase()} MOON {data.moon.number}</Text>
-              <Text style={style.header2}>{ data.moon.words.join(' * ')}</Text>
+
+              <Text style={style.about}>Each day in the 13-moon calendar has a unique combination of energies that affects a specific part of our Being.  Getting in tune with the energies is a wonderful way to reconnect with our essence, feel part of the web of life and live in harmony with all existence!  Read more about today's Kin below.</Text>
+
+              <View style={style.box}>
+                <Text style={[style.header2, {color: data.color }]}>{data.moon.name.toUpperCase()} MOON {data.moon.number}</Text>
+                <Text style={style.header2}>{ data.moon.words.join(' * ')}</Text>
+              </View>
 
               <Text style={style.about}>Name of the Moon <Text style={style.abouthl}>{data.moon.name}</Text> and the Action <Text style={style.abouthl}>{data.moon.words[0]}</Text>, Essence <Text style={style.abouthl}>{data.moon.words[1]}</Text>, and Power <Text style={style.abouthl}>{data.moon.words[2]}</Text> associated with the moon.</Text>
 
-              <Image
-                style={{ width: 160, height: 76 }}
-                source={data.tone.image} />
-              <Image
-                style={{ width: 160, height: 160 }}
-                source={data.tribe.image} />
+              <View style={style.box}>
+                <Image
+                  style={{ width: 160, height: 76 }}
+                  source={data.tone.image} />
+                <Image
+                  style={{ width: 160, height: 160 }}
+                  source={data.tribe.image} />
+              </View>
 
               <Text style={style.about}>
                 Galactic Tone <Text style={style.abouthl}>{data.tone.number} {data.tone.name}</Text> and Solar Seal <Text style={style.abouthl}>{data.tribe.number} {data.tribe.name}</Text>.{'\n\n'}
@@ -75,7 +82,7 @@ export default class AboutScreen extends React.Component {
                 'Energy flows where Attention goes' ... Once you become aware of your own energies and you follow the cycle, you will be living in the present moment and start experiencing increasing synchronicities and magic in your life!
               </Text>
 
-              <View style={{ flexDirection: 'row', flex: 1 }}>
+              <View style={[style.box, { flexDirection: 'row', flex: 1 }]}>
                 <Text style={[style.header2, {color: data.color, paddingRight:8 }]}>{data.glyph}</Text>
                 <Text style={style.header}>{data.moon.name.toUpperCase()} {data.moon.day}</Text>
               </View>
@@ -92,7 +99,7 @@ export default class AboutScreen extends React.Component {
                 * Silio - Heart
               </Text>
 
-              <View style={{ flexDirection: 'row', flex: 1 }}>
+              <View style={[style.box, { flexDirection: 'row', flex: 1 }]}>
                 <Text style={style.header}>{data.date} | </Text>
                 <Text style={style.header}>{data.longCount}</Text>
               </View>
@@ -106,25 +113,22 @@ export default class AboutScreen extends React.Component {
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
               <Text style={style.header2}>{data.date}</Text>
               <Text style={style.text}>{data.gad}</Text>
-            </View>
-            }
-            { data.dot &&
-            <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <Text style={style.header2}>{data.dot}</Text>
+              <Text style={style.about}>Please choose another Kin day to learn more.</Text>
             </View>
             }
             { !data.gad &&
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <Text style={[style.header, { fontSize: 24, color: data.color}]}>{data.name}</Text>
-              <Text style={[style.header2, { color: data.color}]}>Kin {data.kinNumber}</Text>
+              <View style={style.box}>
+                <Text style={[style.header, { fontSize: 24, color: data.color}]}>{data.name}</Text>
+                <Text style={[style.header2, { color: data.color}]}>Kin {data.kinNumber}</Text>
+              </View>
 
               <Text style={style.about}>
                 Galactic Signature <Text style={style.abouthl}>{data.name}</Text> and Kin day <Text style={style.abouthl}>{data.kinNumber}</Text>.{'\n\n'}
-                Each Kin day is a combination of one of 20 Solar Seals and 13 Galactic Tones, called a Galactic Signature.  This makes a total of 260 (20 x 13) combinations, and each day of the 260-day cycle is known as a Kin.{'\n\n'}
-                Each day has a unique combination of energies that affects a specific part of our Being.  Getting in tune with the energies is a wonderful way to reconnect with our essence, feel part of the web of life and live in harmony with all existence!
+                Each Kin day is a combination of one of 20 Solar Seals and 13 Galactic Tones, called a Galactic Signature.  This makes a total of 260 (20 x 13) combinations, and each day of the 260-day cycle is known as a Kin.
               </Text>
 
-              <View style={{ flexDirection: 'row', flex: 1, paddingTop:10 }}>
+              <View style={[style.box, { flexDirection: 'row', flex: 1, paddingTop:10 }]}>
                 <View style={{borderRightWidth: 1, borderRightColor: 'white', paddingRight:10}}>
                   <Text style={[style.header2, { color: data.color}]}>Tone: {data.tone.number} {data.tone.name}</Text>
                   <Text style={style.text}>* { data.tone.words.join('\n* ')}</Text>

@@ -44,13 +44,22 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: '5%',
     marginRight: '5%',
+    paddingTop: 10,
+    paddingBottom: 10,
     lineHeight: 24,
     fontSize: 18,
-    fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular',
-    paddingTop: 10
+    fontFamily: Platform.OS === 'ios' ? 'Metamorphous' : 'metamorphous_regular'
   },
   abouthl: {
     color: 'red'
+  },
+  box: {
+    paddingTop: 6,
+    paddingBottom: 6,
+    paddingLeft: 6,
+    paddingRight: 6,
+    borderWidth: 1,
+    borderColor: 'yellow'
   },
   button: {
     borderColor: '#C1CDCD',
