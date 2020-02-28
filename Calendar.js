@@ -29,6 +29,22 @@ export default class Calendar {
     'Cosmic',
   ];
 
+  TONE_WORDS = {
+    'Magnetic': ['Attracting','Purpose','Unify'],
+    'Lunar': ['Stabilizing','Challenge','Polarize'],
+    'Electric': ['Bonding','Service','Activate'],
+    'Self-Existing': ['Measuring','Form','Define'],
+    'Overtone': ['Commanding','Radiance','Empower'],
+    'Rhythmic': ['Balancing','Equality','Organize'],
+    'Resonant': ['Inspiring','Attunement','Channel'],
+    'Galactic': ['Modeling','Integrity','Harmonize'],
+    'Solar': ['Realizing','Intention','Pulse'],
+    'Spectral': ['Producing','Manifestation','Perfect'],
+    'Planetary': ['Releasing','Liberation','Dissolve'],
+    'Crystal': ['Universalizing','Cooperation','Dedicate'],
+    'Cosmic': ['Transcending','Presence','Endure']
+  };
+
   TONE_COLORS = {
     'blue': 'silver',
     'yellow': 'gold',
@@ -42,7 +58,7 @@ export default class Calendar {
     'Night',
     'Seed',
     'Serpent',
-    'World-Bridger',
+    'Worldbridger',
     'Hand',
     'Star',
     'Moon',
@@ -65,7 +81,7 @@ export default class Calendar {
     'Night': 'blue',
     'Seed': 'yellow',
     'Serpent': 'red',
-    'World-Bridger': 'white',
+    'Worldbridger': 'white',
     'Hand': 'blue',
     'Star': 'yellow',
     'Moon': 'red',
@@ -80,6 +96,29 @@ export default class Calendar {
     'Mirror': 'white',
     'Storm': 'blue',
     'Sun': 'yellow',
+  };
+
+  TRIBE_WORDS = {
+    'Dragon': ['Nurture','Being','Birth'],
+    'Wind': ['Communicate','Breath','Spirit'],
+    'Night': ['Dream','Intuition','Abundance'],
+    'Seed': ['Target','Awareness','Flowering'],
+    'Serpent': ['Survive','Instinct','Life Force'],
+    'Worldbridger': ['Equalize','Opportunity','Death'],
+    'Hand': ['Know','Healing','Accomplishment'],
+    'Star': ['Beautify','Art','Elegance'],
+    'Moon': ['Purify','Flow','Universal Water'],
+    'Dog': ['Love','Loyalty','Heart'],
+    'Monkey': ['Play','Illusion','Magic'],
+    'Human': ['Influence','Wisdom','Free Will'],
+    'Skywalker': ['Explore','Wakefulness','Space'],
+    'Wizard': ['Enchant','Receptivity','Timelessness'],
+    'Eagle': ['Create','Mind','Vision'],
+    'Warrior': ['Question','Fearlessness','Intelligence'],
+    'Earth': ['Evolve','Syncronicity','Navigation'],
+    'Mirror': ['Reflect','Order','Endlessness'],
+    'Storm': ['Catalyze','Energy','Self-Generation'],
+    'Sun': ['Enlighten','Life','Universal Fire']
   };
 
   START_DATE = new Date(Date.UTC(1900, 0, 1, 12, 0, 0));
@@ -165,7 +204,7 @@ export default class Calendar {
     }
 
     // calculate how many moons this year has seen up to the date
-    moon = (Math.floor((days + this.START_MOONDAY - years) / 28) + this.START_MOON) % 13;
+    moonTone = (Math.floor((days + this.START_MOONDAY - years) / 28) + this.START_MOON) % 13;
     // calculate the day of the current moon
     moonDay = (days + this.START_MOONDAY - years) % 28;
     glyph = moonDay % 7;
@@ -177,17 +216,21 @@ export default class Calendar {
       tone: {
         number: tone + 1,
         name: this.TONES[tone],
-        color: this.TONE_COLORS[this.TRIBE_COLORS[this.TRIBES[tribe]]]
+        color: this.TONE_COLORS[this.TRIBE_COLORS[this.TRIBES[tribe]]],
+        words: this.TONE_WORDS[this.TONES[tone]]
       },
       tribe: {
         number: tribe + 1,
-        name: this.TRIBES[tribe]
+        name: this.TRIBES[tribe],
+        words: this.TRIBE_WORDS[this.TRIBES[tribe]]
       },
       moon: {
-        number: moon + 1,
-        day: moonDay + 1
+        name: this.TONES[moonTone],
+        number: moonTone + 1,
+        day: moonDay + 1,
+        words: this.TONE_WORDS[this.TONES[moonTone]]
       },
-      glyph: glyph + 1 + ' ' + this.GLYPHS[glyph],
+      glyph: this.GLYPHS[glyph],
     };
   }
 }
