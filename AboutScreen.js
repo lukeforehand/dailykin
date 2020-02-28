@@ -76,9 +76,9 @@ export default class AboutScreen extends React.Component {
               </View>
 
               <Text style={style.about}>
-                Galactic Tone <Text style={style.abouthl}>{data.tone.number} {data.tone.name}</Text> and Solar Seal <Text style={style.abouthl}>{data.tribe.number} {data.tribe.name}</Text>.{'\n\n'}
-                13 Galactic Tones and 20 Solar Seals describe the process of cosmic creation.  The 13 Galactic Tones are represented by dots and bars.  The Solar Seal can be understood as an archetype or behavior pattern.{'\n\n'}
-                The Galactic Tones can be thought of as radio-pulses that are akin to the pulsations of radio waves from the dense core of the pulsar or quasar. The Solar Seals represent the cycle of frequency-range possibilities for transformation or evolution that each of these radio-pulses may undergo.{'\n\n'}
+                Galactic Tone <Text style={style.abouthl}>{data.tone.number} {data.tone.name}</Text> and Solar Tribe <Text style={style.abouthl}>{data.tribe.number} {data.tribe.name}</Text>.{'\n\n'}
+                13 Galactic Tones and 20 Solar Tribes describe the process of cosmic creation.  The 13 Galactic Tones are represented by dots and bars.  The Solar Tribes are universal energies which symbolize archetypal aspects of our being.{'\n\n'}
+                The Galactic Tones can be thought of as radio-pulses that are akin to the pulsations of radio waves from the dense core of the pulsar or quasar. The Solar Tribes represent the cycle of frequency-range possibilities for transformation or evolution that each of these radio-pulses may undergo.{'\n\n'}
                 'Energy flows where Attention goes' ... Once you become aware of your own energies and you follow the cycle, you will be living in the present moment and start experiencing increasing synchronicities and magic in your life!
               </Text>
 
@@ -125,7 +125,7 @@ export default class AboutScreen extends React.Component {
 
               <Text style={style.about}>
                 Galactic Signature <Text style={style.abouthl}>{data.name}</Text> and Kin day <Text style={style.abouthl}>{data.kinNumber}</Text>.{'\n\n'}
-                Each Kin day is a combination of one of 20 Solar Seals and 13 Galactic Tones, called a Galactic Signature.  This makes a total of 260 (20 x 13) combinations, and each day of the 260-day cycle is known as a Kin.
+                Each Kin day is a combination of one of 20 Solar Tribes and 13 Galactic Tones, called a Galactic Signature.  This makes a total of 260 (20 x 13) combinations, and each day of the 260-day cycle is known as a Kin.
               </Text>
 
               <View style={[style.box, { flexDirection: 'row', flex: 1, paddingTop:10 }]}>
@@ -141,7 +141,7 @@ export default class AboutScreen extends React.Component {
 
               <Text style={style.about}>
                 Name of the Galactic Tone <Text style={style.abouthl}>{data.tone.name}</Text> and the Action <Text style={style.abouthl}>{data.tone.words[0]}</Text>, Essence <Text style={style.abouthl}>{data.tone.words[1]}</Text>, and Power <Text style={style.abouthl}>{data.tone.words[2]}</Text> associated with the tone.{'\n\n'}
-                Name of the Solar Seal <Text style={style.abouthl}>{data.tribe.name}</Text> and the Action <Text style={style.abouthl}>{data.tribe.words[0]}</Text>, Essence <Text style={style.abouthl}>{data.tribe.words[1]}</Text>, and Power <Text style={style.abouthl}>{data.tribe.words[2]}</Text> associated with the seal.
+                Name of the Solar Tribe <Text style={style.abouthl}>{data.tribe.name}</Text> and the Action <Text style={style.abouthl}>{data.tribe.words[0]}</Text>, Essence <Text style={style.abouthl}>{data.tribe.words[1]}</Text>, and Power <Text style={style.abouthl}>{data.tribe.words[2]}</Text> associated with the tribe.
               </Text>
 
             </View>
