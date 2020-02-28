@@ -57,7 +57,7 @@ export default class AboutScreen extends React.Component {
             { !data.gad ?
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
 
-              <Text style={style.about}>Each day in the 13-moon calendar has a unique combination of energies that affects a specific part of our Being.  Getting in tune with the energies is a wonderful way to reconnect with our essence, feel part of the web of life and live in harmony with all existence!  Read more about today's Kin below.</Text>
+              <Text style={style.about}>Each day in the 13-moon calendar has a unique combination of energies that affect each part of our Being.  Getting in tune with the energies is a wonderful way to reconnect with our essence, feel part of the web of life and live in harmony with all existence!  Read more about today's Kin below.</Text>
 
               <View style={style.box}>
                 <Text style={[style.header2, {color: data.color }]}>{data.moon.name.toUpperCase()} MOON {data.moon.number}</Text>
@@ -78,7 +78,6 @@ export default class AboutScreen extends React.Component {
               <Text style={style.about}>
                 Galactic Tone <Text style={style.abouthl}>{data.tone.number} {data.tone.name}</Text> and Solar Tribe <Text style={style.abouthl}>{data.tribe.number} {data.tribe.name}</Text>.{'\n\n'}
                 13 Galactic Tones and 20 Solar Tribes describe the process of cosmic creation.  The 13 Galactic Tones are represented by dots and bars.  The Solar Tribes are universal energies which symbolize archetypal aspects of our being.{'\n\n'}
-                The Galactic Tones can be thought of as radio-pulses that are akin to the pulsations of radio waves from the dense core of the pulsar or quasar. The Solar Tribes represent the cycle of frequency-range possibilities for transformation or evolution that each of these radio-pulses may undergo.{'\n\n'}
                 'Energy flows where Attention goes' ... Once you become aware of your own energies and you follow the cycle, you will be living in the present moment and start experiencing increasing synchronicities and magic in your life!
               </Text>
 
