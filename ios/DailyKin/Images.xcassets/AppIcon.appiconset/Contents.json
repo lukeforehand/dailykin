@@ -3,55 +3,55 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "01.png",
+      "filename" : "thedailykin_appicon_40.png",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "01-1.png",
+      "filename" : "thedailykin_appicon_60.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "01-2.png",
+      "filename" : "thedailykin_appicon_58.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "01-3.png",
+      "filename" : "thedailykin_appicon_87.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "01-7.png",
+      "filename" : "thedailykin_appicon_80.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "01-6.png",
+      "filename" : "thedailykin_appicon_120-1.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "01-5.png",
+      "filename" : "thedailykin_appicon_120.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "01-4.png",
+      "filename" : "thedailykin_appicon_180.png",
       "scale" : "3x"
     },
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "01-8.png",
+      "filename" : "thedailykin_appicon_1024.png",
       "scale" : "1x"
     }
   ],

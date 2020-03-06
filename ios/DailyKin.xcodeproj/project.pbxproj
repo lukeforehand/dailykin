@@ -62,7 +62,7 @@
 		00E356EE1AD99517003FC87E /* DailyKinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DailyKinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* DailyKinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DailyKinTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* DailyKin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyKin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* The Daily Kin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Daily Kin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = DailyKin/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = DailyKin/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* DailyKin.app */,
+				13B07F961A680F5B00A75B9A /* The Daily Kin.app */,
 				00E356EE1AD99517003FC87E /* DailyKinTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* DailyKin-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* DailyKin-tvOSTests.xctest */,
@@ -299,7 +299,7 @@
 			);
 			name = DailyKin;
 			productName = DailyKin;
-			productReference = 13B07F961A680F5B00A75B9A /* DailyKin.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* The Daily Kin.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* DailyKin-tvOS */ = {
@@ -736,13 +736,14 @@
 				DEVELOPMENT_TEAM = 6KKG5JRQ8R;
 				INFOPLIST_FILE = DailyKin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = DailyKin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DailyKin;
+				PRODUCT_NAME = "The Daily Kin";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -756,13 +757,14 @@
 				DEVELOPMENT_TEAM = 6KKG5JRQ8R;
 				INFOPLIST_FILE = DailyKin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = DailyKin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DailyKin;
+				PRODUCT_NAME = "The Daily Kin";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -908,6 +910,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = "";
 				DEVELOPMENT_TEAM = 6KKG5JRQ8R;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -931,6 +934,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "";
 			};
 			name = Debug;
 		};
@@ -965,6 +969,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = "";
 				DEVELOPMENT_TEAM = 6KKG5JRQ8R;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -981,6 +986,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "";
 			};
 			name = Release;
 		};
