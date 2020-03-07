@@ -22,3 +22,7 @@ use xcode
 ./gradlew bundleRelease
 ```
 https://facebook.github.io/react-native/docs/signed-apk-android.html
+
+### enable in-app purchase
+https://help.apple.com/xcode/mac/current/#/dev88ff319e7
+

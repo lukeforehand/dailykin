@@ -43,6 +43,7 @@
 		395C9F032412EC31006AE025 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4386DFB3E8CA4063BD8F89F8 /* SimpleLineIcons.ttf */; };
 		395C9F042412EC31006AE025 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 462763F244EE421BB91216A9 /* Zocial.ttf */; };
 		395C9F052412EC31006AE025 /* metamorphous_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BEC0B3D4EF944769873768D2 /* metamorphous_regular.ttf */; };
+		395C9F07241403DB006AE025 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 395C9F06241403DB006AE025 /* StoreKit.framework */; };
 		3AA1C041777C43D09A2391C8 /* 19.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D1FA10E0CBB4F73804D00BB /* 19.png */; };
 		3C83B9954D0F40098EABCCF4 /* 2g.png in Resources */ = {isa = PBXBuildFile; fileRef = FD1DA67B85AC4BA6BD02C772 /* 2g.png */; };
 		4387015627B14B5AB5D1EFBA /* 7s.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BD82B81EA60426DAA67C4AB /* 7s.png */; };
@@ -148,6 +149,7 @@
 		36B309AC3BB04243ACFFE40C /* 4g.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = 4g.png; path = ../assets/images/tones/4g.png; sourceTree = "<group>"; };
 		3781255A43DC60BC408703A9 /* Pods-DailyKin-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyKin-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-DailyKin-tvOS/Pods-DailyKin-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		390EEC2C18CC4EE7A9AAEEC9 /* 07.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = 07.png; path = ../assets/images/tribes/07.png; sourceTree = "<group>"; };
+		395C9F06241403DB006AE025 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		398266562A5C48B4A3B6AA5D /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = ../assets/fonts/Octicons.ttf; sourceTree = "<group>"; };
 		3AC427F6D7D948DC938CC0E4 /* 2s.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = 2s.png; path = ../assets/images/tones/2s.png; sourceTree = "<group>"; };
 		3ADE8F5990564A14AE0BE387 /* moon_new.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = moon_new.png; path = ../assets/images/moons/moon_new.png; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8ED28352D0FD945AA694A995 /* libPods-Daily Kin.a in Frameworks */,
+				395C9F07241403DB006AE025 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +370,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				395C9F06241403DB006AE025 /* StoreKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				76FB363A1587A9CD69FCA070 /* libPods-DailyKin-tvOS.a */,
@@ -955,12 +959,12 @@
 			baseConfigurationReference = 8E2E7F4A3EB2E3DEFC3EC6E8 /* Pods-Daily Kin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 6KKG5JRQ8R;
 				INFOPLIST_FILE = DailyKin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -977,11 +981,11 @@
 			baseConfigurationReference = F691026725235FA749704F16 /* Pods-Daily Kin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6KKG5JRQ8R;
 				INFOPLIST_FILE = DailyKin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
