@@ -174,11 +174,11 @@ export default class HomeScreen extends React.Component {
               { !this.state.data.gad ?
               <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <View style={{ flexDirection: 'row', flex: 1, paddingTop:10 }}>
-                  <View style={{borderRightWidth: 1, borderRightColor: 'white', paddingRight:10}}>
+                  <View style={{flex: 1, borderRightWidth: 1, borderRightColor: 'white', paddingRight:10}}>
                     <Text style={[style.header2, { color: this.state.data.color}]}>Tone: {this.state.data.tone.number} {this.state.data.tone.name}</Text>
                     <Text style={style.text}>* { this.state.data.tone.words.join('\n* ')}</Text>
                   </View>
-                  <View style={{paddingLeft:10}}>
+                  <View style={{flex: 1, paddingLeft:10}}>
                     <Text style={[style.header2, { color: this.state.data.color}]}>Tribe: {this.state.data.tribe.number} {this.state.data.tribe.name}</Text>
                     <Text style={style.text}>* { this.state.data.tribe.words.join('\n* ')}</Text>
                   </View>
