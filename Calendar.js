@@ -31,19 +31,19 @@ export default class Calendar {
   ];
 
   TONE_WORDS = {
-    'Magnetic': ['Attracting','Purpose','Unify'],
-    'Lunar': ['Stabilizing','Challenge','Polarize'],
-    'Electric': ['Bonding','Service','Activate'],
-    'Self-Existing': ['Measuring','Form','Define'],
-    'Overtone': ['Commanding','Radiance','Empower'],
-    'Rhythmic': ['Balancing','Equality','Organize'],
-    'Resonant': ['Inspiring','Attunement','Channel'],
-    'Galactic': ['Modeling','Integrity','Harmonize'],
-    'Solar': ['Realizing','Intention','Pulse'],
-    'Spectral': ['Releasing','Liberation','Dissolve'],
-    'Planetary': ['Producing','Manifestation','Perfect'],
-    'Crystal': ['Universalizing','Cooperation','Dedicate'],
-    'Cosmic': ['Transcending','Presence','Endure']
+    'Magnetic': ['Attracting', 'Purpose', 'Unify'],
+    'Lunar': ['Stabilizing', 'Challenge', 'Polarize'],
+    'Electric': ['Bonding', 'Service', 'Activate'],
+    'Self-Existing': ['Measuring', 'Form', 'Define'],
+    'Overtone': ['Commanding', 'Radiance', 'Empower'],
+    'Rhythmic': ['Balancing', 'Equality', 'Organize'],
+    'Resonant': ['Inspiring', 'Attunement', 'Channel'],
+    'Galactic': ['Modeling', 'Integrity', 'Harmonize'],
+    'Solar': ['Realizing', 'Intention', 'Pulse'],
+    'Spectral': ['Releasing', 'Liberation', 'Dissolve'],
+    'Planetary': ['Producing', 'Manifestation', 'Perfect'],
+    'Crystal': ['Universalizing', 'Cooperation', 'Dedicate'],
+    'Cosmic': ['Transcending', 'Presence', 'Endure']
   };
 
   TONE_COLORS = {
@@ -100,26 +100,26 @@ export default class Calendar {
   };
 
   TRIBE_WORDS = {
-    'Dragon': ['Nurture','Being','Birth'],
-    'Wind': ['Communicate','Breath','Spirit'],
-    'Night': ['Dream','Intuition','Abundance'],
-    'Seed': ['Target','Awareness','Flowering'],
-    'Serpent': ['Survive','Instinct','Life Force'],
-    'Worldbridger': ['Equalize','Opportunity','Death'],
-    'Hand': ['Know','Healing','Accomplishment'],
-    'Star': ['Beautify','Art','Elegance'],
-    'Moon': ['Purify','Flow','Universal Water'],
-    'Dog': ['Love','Loyalty','Heart'],
-    'Monkey': ['Play','Illusion','Magic'],
-    'Human': ['Influence','Wisdom','Free Will'],
-    'Skywalker': ['Explore','Wakefulness','Space'],
-    'Wizard': ['Enchant','Receptivity','Timelessness'],
-    'Eagle': ['Create','Mind','Vision'],
-    'Warrior': ['Question','Fearlessness','Intelligence'],
-    'Earth': ['Evolve','Syncronicity','Navigation'],
-    'Mirror': ['Reflect','Order','Endlessness'],
-    'Storm': ['Catalyze','Energy','Self-Generation'],
-    'Sun': ['Enlighten','Life','Universal Fire']
+    'Dragon': ['Nurture', 'Being', 'Birth'],
+    'Wind': ['Communicate', 'Breath', 'Spirit'],
+    'Night': ['Dream', 'Intuition', 'Abundance'],
+    'Seed': ['Target', 'Awareness', 'Flowering'],
+    'Serpent': ['Survive', 'Instinct', 'Life Force'],
+    'Worldbridger': ['Equalize', 'Opportunity', 'Death'],
+    'Hand': ['Know', 'Healing', 'Accomplishment'],
+    'Star': ['Beautify', 'Art', 'Elegance'],
+    'Moon': ['Purify', 'Flow', 'Universal Water'],
+    'Dog': ['Love', 'Loyalty', 'Heart'],
+    'Monkey': ['Play', 'Illusion', 'Magic'],
+    'Human': ['Influence', 'Wisdom', 'Free Will'],
+    'Skywalker': ['Explore', 'Wakefulness', 'Space'],
+    'Wizard': ['Enchant', 'Receptivity', 'Timelessness'],
+    'Eagle': ['Create', 'Mind', 'Vision'],
+    'Warrior': ['Question', 'Fearlessness', 'Intelligence'],
+    'Earth': ['Evolve', 'Syncronicity', 'Navigation'],
+    'Mirror': ['Reflect', 'Order', 'Endlessness'],
+    'Storm': ['Catalyze', 'Energy', 'Self-Generation'],
+    'Sun': ['Enlighten', 'Life', 'Universal Fire']
   };
 
   loadReadings(kinNumber, date) {
@@ -527,11 +527,16 @@ export default class Calendar {
       // date is before Feb 29, so the year's leap day hasn't happened yet
       leapDays = leapDays - 1;
     }
-    days = days - leapDays;
+    if (date.getFullYear() >= 2021) {
+      // some bug in leap year calculation as of 2021, so doing this
+      leapDays = leapDays + 1;
+    }
 
+    days = days - leapDays;
     tribe = (days + this.START_TRIBE) % 20;
     tone = (days + this.START_TONE) % 13;
     kin = (days + this.START_KIN) % 260;
+
     guide = ((tone * 13) + (tribe - tone)) % 20;
 
     // calculate the years since first known kin day
@@ -556,7 +561,7 @@ export default class Calendar {
       color: this.TRIBE_COLORS[this.TRIBES[tribe]],
       kinNumber: kin + 1,
       longCount: 'NS' + Math.floor(1 + (date.getFullYear() - this.START_LONGCOUNT.getFullYear()) / 52) + '.' + (date.getFullYear() - this.START_LONGCOUNT.getFullYear() - (date.getTime() < new Date(Date.UTC(date.getFullYear(), 1, 29, 12, 0, 0)).getTime() ? 1 : 0)) + '.' + (moonTone + 1) + '.' + (moonDay + 1),
-      dot: date.getMonth() == 6 && date.getDate() == 25 ? 'Day out of time!  It is a time for great celebration!': undefined,
+      dot: date.getMonth() == 6 && date.getDate() == 25 ? 'Day out of time!  It is a time for great celebration!' : undefined,
       tone: {
         number: tone + 1,
         name: this.TONES[tone],
